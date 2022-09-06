@@ -10,6 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Alert } from 'react-native'
 import { loginSchema } from '../utils/form-validation';
 import { firebase } from '../../firebase'
+import { useNavigation } from '@react-navigation/native';
 
 interface LoginScreenProps {
 
@@ -27,6 +28,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
 
         },
     });
+    const nav = useNavigation()
     const [open, setOpen] = React.useState<boolean>(false)
 
 
@@ -36,7 +38,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
             <KeyboardAwareScrollView style={{ backgroundColor: colors.ebony, height: '100%' }} enableOnAndroid={true}>
                 <View bg={colors.ebony} h={'full'} >
 
-
+                    
                     <Center mt={'1'} pb={'2.5'} borderBottomColor={'white'} borderWidth={0.75}>
                         <Heading bold size={'2xl'} color={'white'}>Welcome Back</Heading>
                         <Heading size={'lg'} color={'white'}>Login to Leadistro</Heading>
@@ -91,7 +93,16 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
                             console.log('firebase login func');
                         }}>
                             <Box mt={'2'} borderColor={colors.gray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'2'}>
-                                <Text color={colors.gray} fontWeight={'black'} fontSize={'lg'}>Sign in to Leadistro</Text>
+                                <Text color={colors.gray} fontWeight={'black'} fontSize={'lg'}>Login</Text>
+                            </Box>
+                        </TouchableOpacity>
+                    </Center>
+                    <Center mb={'2'}>
+                        <TouchableOpacity onPress={() => {
+                           nav.navigate('register' as never)
+                        }}>
+                            <Box mt={'2'} borderColor={colors.coolGray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'2'}>
+                                <Text color={colors.white} fontWeight={'black'} fontSize={'lg'}>Dont have an account? Sign-Up</Text>
                             </Box>
                         </TouchableOpacity>
                     </Center>

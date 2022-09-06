@@ -5,6 +5,7 @@ import { FirstScreen } from './screens/FirstScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { RegisterScreen } from './screens/RegisterScreen';
 import { HomeScreen } from './screens/HomeScreen';
+import { SettingsScreen } from './screens/SettingsScreen';
 
 
 
@@ -17,6 +18,7 @@ export const SignedInStack = () => {
     return (
         <Stack.Navigator initialRouteName='home' screenOptions={{ header: () => null }}>
             <Stack.Screen name='home' component={HomeScreen} />
+            <Stack.Screen name='settings' component={SettingsScreen} />
         </Stack.Navigator>
     );
 }
@@ -27,6 +29,7 @@ export const SignedOutStack = () => {
             <Stack.Screen name='first' component={FirstScreen} />
             <Stack.Screen name='login' component={LoginScreen} />
             <Stack.Screen name='register' component={RegisterScreen} />
+           
         </Stack.Navigator>
     );
 }

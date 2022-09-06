@@ -35,22 +35,17 @@ export const FirstScreen: React.FC<FirstScreenProps> = ({ }) => {
                         customized cold emails.
                     </Text>
                 </Center>
-                <TouchableOpacity onPress={() => nav.navigate('login' as never)}>
-                    <Center mx={'5'} mt={'5'}>
-                        <HStack alignItems={'center'} space={'1.5'} bg={colors.gray} rounded={'full'} pl={'3.5'}>
-                            <MailIcon color={colors.ebony} />
-                            <Button rounded={'full'} size={'sm'} color={colors.gray} variant={'solid'} bgColor={colors.coolGray}>Login with Email and Password</Button>
-                        </HStack>
-                    </Center>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => nav.navigate('register' as never)}>
-                    <Center mx={'5'} mt={'5'}>
-                        <HStack alignItems={'center'} space={'1.5'} bg={colors.gray} rounded={'full'} pl={'3.5'}>
-                            <MailIcon color={colors.ebony} />
-                            <Button rounded={'full'} size={'sm'} color={colors.gray} variant={'solid'} bgColor={colors.coolGray}>Sign up with Email and Password</Button>
-                        </HStack>
-                    </Center>
-                </TouchableOpacity>
+                <Box mb={'5'}>
+                    <TouchableOpacity onPress={() => nav.navigate('login' as never)}>
+                        <Center mx={'5'} mt={'5'}>
+                            <HStack alignItems={'center'} space={'1.5'} bg={colors.gray} rounded={'full'} pl={'3.5'}>
+                                <MailIcon color={colors.ebony} />
+                                <Button rounded={'full'} size={'lg'} color={colors.gray} variant={'solid'} bgColor={colors.coolGray}>Login with Email</Button>
+                            </HStack>
+                        </Center>
+                    </TouchableOpacity>
+                </Box>
+
 
                 <Divider color={colors.lightGray} mt={'5'} />
 

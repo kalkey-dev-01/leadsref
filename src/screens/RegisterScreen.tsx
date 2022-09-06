@@ -59,26 +59,26 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
                                 <Text fontSize={'md'} fontWeight={'bold'} color={colors.lightGray} >Create an Account for yourself</Text>
                             </Center>
                             <Box mx={'3'} mt={'3'} >
-                                <Input bgColor={colors.lightGray} variant={'rounded'} placeholder={'Enter Your Email'} autoCapitalize={'none'} autoCorrect={false}
-                                    value={values.email} 
-                                    
+                                <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Enter Your Email'} autoCapitalize={'none'} autoCorrect={false}
+                                    value={values.email}
+
                                     onChangeText={handleChange('email')}
                                     onBlur={handleBlur('email')} accessibilityLabel={'Email'}
-                                    borderColor={errors.email ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={colors.ebony}
+                                    borderColor={errors.confirmPassword ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                                 />
                                 <Text ml={'3.5'} fontSize={'xs'} color={colors.lightGray} mt={'0.5'} mb={'1'} >{errors.email}</Text>
                             </Box>
                             <Box mx={'3'}>
-                                <Input bgColor={colors.lightGray} variant={'rounded'} placeholder={'Enter Your Name'} autoCapitalize={'none'} autoCorrect={false}
+                                <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Enter Your Name'} autoCapitalize={'none'} autoCorrect={false}
                                     value={values.username}
                                     onChangeText={handleChange('username')}
                                     onBlur={handleBlur('username')}
-                                    borderColor={errors.username ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={colors.ebony}
+                                    borderColor={errors.username ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                                 />
                                 <Text ml={'3.5'} fontSize={'xs'} color={colors.lightGray} my={'1'} >{errors.username}</Text>
                             </Box>
                             <Box mx={'3'}  >
-                                <Input bgColor={colors.lightGray} variant={'rounded'} placeholder={'Enter Your Password'} autoCapitalize={'none'} autoCorrect={false}
+                                <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Enter Your Password'} autoCapitalize={'none'} autoCorrect={false}
                                     value={values.password}
                                     onChangeText={handleChange('password')}
                                     onBlur={handleBlur('password')}
@@ -87,27 +87,27 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
                                         <>
                                             <TouchableOpacity onPress={() => setOpen(!open)}>
                                                 <Box mr={3}>
-                                                    {open ? <EyeIcon color={colors.ebony} /> : <EyeOffIcon color={colors.ebony} />}
+                                                    {open ? <EyeIcon color={useColorModeValue(colors.ebony, colors.white)} /> : <EyeOffIcon color={useColorModeValue(colors.ebony, colors.white)} />}
                                                 </Box>
                                             </TouchableOpacity>
                                         </>
                                     }
-                                    borderColor={errors.password ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={colors.ebony}
+                                    borderColor={errors.password ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                                 />
                                 <Text ml={'3.5'} fontSize={'xs'} color={colors.lightGray} mt={'0.5'} mb={'1'} >{errors.password}</Text>
                             </Box>
                             <Box mx={'3'} >
-                                <Input bgColor={colors.lightGray} variant={'rounded'} placeholder={'Confirm Password'} autoCapitalize={'none'} autoCorrect={false}
+                                <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Confirm Password'} autoCapitalize={'none'} autoCorrect={false}
                                     value={values.confirmPassword}
                                     onBlur={handleBlur('confirmPassword')}
                                     onChangeText={handleChange('confirmPassword')}
-                                    borderColor={errors.confirmPassword ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={colors.ebony}
+                                    borderColor={errors.confirmPassword ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                                     type={open ? "text" : "password"}
                                     InputRightElement={
                                         <>
                                             <TouchableOpacity onPress={() => setOpen(!open)}>
                                                 <Box mr={3}>
-                                                    {open ? <EyeIcon color={colors.ebony} /> : <EyeOffIcon color={colors.ebony} />}
+                                                    {open ? <EyeIcon color={useColorModeValue(colors.ebony, colors.white)} /> : <EyeOffIcon color={useColorModeValue(colors.ebony, colors.white)} />}
                                                 </Box>
                                             </TouchableOpacity>
                                         </>
@@ -138,7 +138,7 @@ const SignUp = async (email: string, password: string, name: string) => {
         db.collection('users').doc(authUser.user?.uid).set({
             uid: authUser.user?.uid,
             name: name,
-            emil: authUser.user?.email
+            email: authUser.user?.email
         })
         // db.collection('users').add({
         //     uid: authUser.user?.uid,
