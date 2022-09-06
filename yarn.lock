@@ -3066,14 +3066,23 @@
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
 
-"@types/react-native@~0.69.1":
-  version "0.69.5"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.69.5.tgz#7709fdbff031a5ecf1956705e6c4a07cdfe6867c"
-  integrity sha512-mSUCuGUsW2kJlZiu4GmdYVDKZX/52iyC9rm6dxAmflJj1b7kSO/CMSDy5WbcfS8QerxTqbYGTrIwHD0GnXHzbQ==
+"@types/react-native@^0.69.6":
+  version "0.69.6"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.69.6.tgz#b792b7eb024a14869fdbbe97536e6014cb3be731"
+  integrity sha512-jx1QdJT3CdQc42EpoIGu22F1wrPZjmC/CNkfR5sRs5GxloJzthuICK7CKqAGEo2SekPs+YYzhbzrJGi1IrG5Lg==
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@~18.0.0":
+"@types/react@*":
+  version "18.0.18"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.18.tgz#9f16f33d57bc5d9dca848d12c3572110ff9429ac"
+  integrity sha512-6hI08umYs6NaiHFEEGioXnxJ+oEhY3eRz8VCUaudZmGdtvPviCJB8mgaMxaDWAdPSYd4eFavrPk2QIolwbLYrg==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@~18.0.0":
   version "18.0.17"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.17.tgz#4583d9c322d67efe4b39a935d223edcc7050ccf4"
   integrity sha512-38ETy4tL+rn4uQQi7mB81G7V1g0u2ryquNmsVIOKUAEIDK+3CUjZ6rSRpdvS99dNBnkLFL83qfmtLacGOTIhwQ==
@@ -7152,20 +7161,20 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-codegen@^0.69.1:
-  version "0.69.1"
-  resolved "https://registry.yarnpkg.com/react-native-codegen/-/react-native-codegen-0.69.1.tgz#3632be2f24464e6fad8dd11a25d1b6f3bc2c7d0b"
-  integrity sha512-TOZEqBarczcyYN3iZE3VpKkooOevaAzBq9n7lU0h9mQUvtRhLVyolc+a5K6cWI0e4v4K69I0MqzjPcPeFKo32Q==
+react-native-codegen@^0.69.2:
+  version "0.69.2"
+  resolved "https://registry.yarnpkg.com/react-native-codegen/-/react-native-codegen-0.69.2.tgz#e33ac3b1486de59ddae687b731ddbfcef8af0e4e"
+  integrity sha512-yPcgMHD4mqLbckqnWjFBaxomDnBREfRjDi2G/WxNyPBQLD+PXUEmZTkDx6QoOXN+Bl2SkpnNOSsLE2+/RUHoPw==
   dependencies:
     "@babel/parser" "^7.14.0"
     flow-parser "^0.121.0"
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-gesture-handler@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.6.0.tgz#8eeb25a2be9718db2e241084f4a337bec0e30ed1"
-  integrity sha512-IwdYdt5FKjjbRSrSqh8hoNctlYZl5DFnqSJ6buKtrl4A4gyzkrtW6WcmOFl5LnCa6Bcw+znSD77O6UiZ8qda7g==
+react-native-gesture-handler@~2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.5.0.tgz#61385583570ed0a45a9ed142425e35f8fe8274fb"
+  integrity sha512-djZdcprFf08PZC332D+AeG5wcGeAPhzfCJtB3otUgOgTlvjVXmg/SLFdPJSpzLBqkRAmrC77tM79QgKbuLxkfw==
   dependencies:
     "@egjs/hammerjs" "^2.0.17"
     hoist-non-react-statics "^3.3.0"
@@ -7195,6 +7204,11 @@ react-native-keyboard-aware-scroll-view@^0.9.5:
   dependencies:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
+
+react-native-pager-view@5.4.24:
+  version "5.4.24"
+  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.4.24.tgz#8626e757ddc55e41eca66d2f8a8a75aec54591ee"
+  integrity sha512-dRMB7i3B+mu4NCeIN6gqbR/kC/rr2wzqO0gisXDdJwJr78G24sWoTNpLEDFo3G8TFHY9nTMutVl5CUvkN2dp6g==
 
 react-native-reanimated@~2.9.1:
   version "2.9.1"
@@ -7231,6 +7245,11 @@ react-native-svg@12.3.0:
     css-select "^4.2.1"
     css-tree "^1.0.0-alpha.39"
 
+react-native-tab-view@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-3.1.1.tgz#1f8d7a835ab4f5b1b1407ec8dddc1053b53fa3c6"
+  integrity sha512-M5pRN6utQfytKWoKlKVzg5NbkYu308qNoW1khGTtEOTs1k14p2dHJ/BWOJoJYHKbPVUyZldbG9MFT7gUl4YHnw==
+
 react-native-web@~0.18.7:
   version "0.18.7"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.18.7.tgz#2b688502b3d389c49346fa3d8c9a20cfd52f507f"
@@ -7244,10 +7263,10 @@ react-native-web@~0.18.7:
     postcss-value-parser "^4.2.0"
     styleq "^0.1.2"
 
-react-native@0.69.4:
-  version "0.69.4"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.69.4.tgz#d66f2a117442a9398b065876afdc568b209dc4da"
-  integrity sha512-rqNMialM/T4pHRKWqTIpOxA65B/9kUjtnepxwJqvsdCeMP9Q2YdSx4VASFR9RoEFYcPRU41yGf6EKrChNfns3g==
+react-native@0.69.5:
+  version "0.69.5"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.69.5.tgz#959142bfef21beed837160b54aa17313f5e1898f"
+  integrity sha512-4Psrj1nDMLQjBXVH8n3UikzOHQc8+sa6NbxZQR0XKtpx8uC3HiJBgX+/FIum/RWxfi5J/Dt/+A2gLGmq2Hps8g==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^8.0.4"
@@ -7272,7 +7291,7 @@ react-native@0.69.4:
     pretty-format "^26.5.2"
     promise "^8.0.3"
     react-devtools-core "4.24.0"
-    react-native-codegen "^0.69.1"
+    react-native-codegen "^0.69.2"
     react-native-gradle-plugin "^0.0.7"
     react-refresh "^0.4.0"
     react-shallow-renderer "16.15.0"

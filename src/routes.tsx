@@ -6,10 +6,14 @@ import { LoginScreen } from './screens/LoginScreen';
 import { RegisterScreen } from './screens/RegisterScreen';
 import { HomeScreen } from './screens/HomeScreen';
 
+
+
+
+
 const Stack = createStackNavigator()
 
-
 export const SignedInStack = () => {
+
     return (
         <Stack.Navigator initialRouteName='home' screenOptions={{ header: () => null }}>
             <Stack.Screen name='home' component={HomeScreen} />
@@ -26,3 +30,4 @@ export const SignedOutStack = () => {
         </Stack.Navigator>
     );
 }
+

@@ -18,15 +18,15 @@ export const FirstScreen: React.FC<FirstScreenProps> = ({ }) => {
 
     const nav = useNavigation()
     return (
-        <SafeAreaView style={{ backgroundColor: useColorModeValue(colors.lightGray, colors.ebony) }}>
+        <SafeAreaView style={{ backgroundColor: colors.ebony }}>
 
-            <View bg={useColorModeValue(colors.lightGray, colors.ebony)} h={'full'} >
+            <View bg={colors.ebony} h={'full'} >
                 {/* Image */}
                 <Center mt={'5'}>
                     <Image source={require('../../assets/leedVec.png')} alt={'lOGO'} h={220} w={350} />
                 </Center>
                 <Center mt={10}>
-                    <Heading bold size={'2xl'}>leadistro</Heading>
+                    <Heading bold size={'2xl'} color={'white'}>leadistro</Heading>
                 </Center>
                 <Center mx={'10'} mt={'1.5'}>
                     <Text textAlign={'center'} fontSize={'lg'} color={colors.lightGray}>
