@@ -13,16 +13,13 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ }) => {
     const nav = useNavigation()
     
-
     return (
-
-        <Box backgroundColor={useColorModeValue(colors.gray, colors.ebony)}>
+        <Box borderBottomWidth={'2'} mt={'1'} borderBottomColor={useColorModeValue(colors.ebony, colors.lightGray)} backgroundColor={useColorModeValue(colors.lightGray, colors.ebony)}>
             <HStack alignItems={'center'} justifyContent={'space-evenly'}>
-                <Heading>
+                <Heading size={'xl'}>
                     Leadistro
-                </Heading>
-               
-                <SettingsIcon color={useColorModeValue(colors.ebony, colors.lightGray)} onPress={() => nav.navigate('settings' as never)} />
+                </Heading>               
+                <SettingsIcon size={27.5} color={useColorModeValue(colors.ebony, colors.lightGray)} onPress={() => nav.navigate('settings' as never)} />
             </HStack>
         </Box>
     );
