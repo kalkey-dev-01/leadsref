@@ -1,13 +1,15 @@
-import { Center, Text, useColorModeValue, View } from 'native-base'
+import { Center, Heading, HStack, Input, Text, useColorModeValue, View } from 'native-base'
 import React from 'react'
-import { BackspaceIcon } from 'react-native-heroicons/outline';
+import { IdentificationIcon, SearchCircleIcon } from 'react-native-heroicons/outline';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../utils/colors';
 import { firebase } from '../../firebase'
 import { useFormik } from 'formik';
 import { domainSchema } from '../utils/form-validation';
 import EnrichCard from './renderComponents/EnrichCard';
-import axios from'axios';
+import axios, { AxiosResponse } from 'axios';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Animated, { useAnimatedStyle, withTiming, withSpring, useSharedValue } from 'react-native-reanimated'
 interface EnrichCompanyProps {
 
 }
@@ -46,7 +48,7 @@ interface RootObject {
     email_format: string;
 }
 export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
-    const [data, setData] = React.useState<RootObject[]>([])
+    const [data, setData] = React.useState<RootObject[] | AxiosResponse>([])
     const {
         values, handleBlur, handleChange, handleSubmit, errors
     } = useFormik({
@@ -58,17 +60,28 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
 
         }
     })
-  
+
 
     return (
-        <View h={'full'} borderTopColor={useColorModeValue(colors.coolGray, colors.white)} borderTopWidth={'1'} backgroundColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-            <Center>
-                <Text>Enrich Company</Text>
-                <EnrichCard items={data}
-                    render={(item) => `Data is ${item}`}
-                />
-            </Center>
-        </View>
+        <KeyboardAwareScrollView style={{ backgroundColor: useColorModeValue(colors.lightGray, colors.ebony), height: '100%' }} enableOnAndroid={true}>
+            <View h={'full'} borderTopColor={useColorModeValue(colors.coolGray, colors.white)} borderTopWidth={'0.5'} backgroundColor={useColorModeValue(colors.lightGray, colors.ebony)}>
+                <>
+                    <HStack justifyContent={'space-between'} alignItems={'center'} mx={'4'} my={'3'}>
+                        <Heading color={useColorModeValue(colors.ebony, colors.white)} size={'md'}>Search Employees Information</Heading>
+                        <IdentificationIcon size={30} color={useColorModeValue(colors.ebony, colors.white)} />
+                    </HStack>
+                    <Input mx={'5'} variant={'rounded'} placeholder={'Enter The domain'} placeholderTextColor={useColorModeValue(colors.coolGray, colors.lightGray)}
+                        onChangeText={handleChange('domain')} onBlur={handleBlur('domain')} value={values.domain}
+                        borderColor={errors.domain ? useColorModeValue(colors.gray, colors.coolGray) : useColorModeValue(colors.gray, colors.coolGray)}
+                        InputRightElement={<SearchCircleIcon size={25} color={useColorModeValue(colors.ebony, colors.white)} style={{ marginHorizontal: 15 }} />}
+                    />
+                    <Center>
+                        {errors.domain && <Text fontSize={'xs'} mt={'0.5'} mb={'1'} >{errors.domain}</Text>}
+                    </Center>
+                    {/* Complete Post Logic and Rendering */}
+                </>
+            </View>
+        </KeyboardAwareScrollView>
 
     );
 }
