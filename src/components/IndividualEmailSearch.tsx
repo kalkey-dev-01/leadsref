@@ -11,7 +11,7 @@ export const IndividualEmailSearch: React.FC<IndividualEmailSearchProps> = ({ })
     return (
         <KeyboardAwareScrollView style={{ backgroundColor: useColorModeValue(colors.lightGray, colors.ebony), height: '100%' }} enableOnAndroid={true}>
             <View h={'full'}  backgroundColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-
+            
             </View>
         </KeyboardAwareScrollView>
     );

@@ -1,5 +1,6 @@
+import { AxiosResponse } from 'axios';
 import { Text, View } from 'native-base';
-import React from 'react'
+import React, { FC, useEffect } from 'react'
 interface RootObject {
     first_name: string;
     last_name: string;
@@ -36,7 +37,7 @@ interface RootObject {
 
 export type ListComponent = <T>(
     { items, render }: { items: T[]; render: (item: T) => React.ReactNode }
-) => React.ReactElement;
+) => JSX.Element;
 
 
 
@@ -57,12 +58,20 @@ export type ListComponent = <T>(
 // }
 
 
+// const Card: FC = (data: AxiosResponse,) => {
+//     return (
+//         <>
+//         </>
+
+//     )
+// }
+
 
 const EnrichCard: ListComponent = ({ items, render }) => {
-    
+
     return (
         <View>
-            {items.map((item, index) => <><Text>{render(item)}</Text></>)}
+            {items.map((item) => <><Text>{render(item)}</Text></>)}
         </View>
 
     )
