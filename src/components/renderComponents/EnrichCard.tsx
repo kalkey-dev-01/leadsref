@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { Text, View } from 'native-base';
+import { Box, Center, Text, useColorModeValue, View } from 'native-base';
 import React, { FC, useEffect } from 'react'
+import colors from '../../utils/colors';
 interface RootObject {
     first_name: string;
     last_name: string;
@@ -68,10 +69,11 @@ export type ListComponent = <T>(
 
 
 const EnrichCard: ListComponent = ({ items, render }) => {
-
+    let bgcol = useColorModeValue(colors.lightGray, colors.ebony)
+    let borcol = useColorModeValue(colors.ebony, colors.lightGray)
     return (
         <View>
-            {items.map((item) => <><Text>{render(item)}</Text></>)}
+            {items.slice(0, 5).map((item) => <>{render(item)}</>)}
         </View>
 
     )

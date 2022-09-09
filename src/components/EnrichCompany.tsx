@@ -1,4 +1,4 @@
-import { Box, Center, Heading, HStack, Input, Text, useColorModeValue, View } from 'native-base'
+import { Box, Center, Heading, HStack, Input, Text, useColorModeValue, View, VStack } from 'native-base'
 import React, { useCallback, useEffect } from 'react'
 import { IdentificationIcon, SearchCircleIcon } from 'react-native-heroicons/outline';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -51,6 +51,8 @@ interface RootObject {
 export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
     const [data, setData] = React.useState<AxiosResponse>()
     const [loading, setLoading] = React.useState<boolean>(false)
+    let bgcol = useColorModeValue(colors.lightGray, colors.ebony)
+    let borcol = useColorModeValue(colors.ebony, colors.lightGray)
     const {
         values, handleBlur, handleChange, handleSubmit, errors
     } = useFormik({
@@ -74,13 +76,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
         }
 
     })
-    const onPress = useCallback(async () => {
 
-        console.log('callback triggered');
-        console.log(values.domain)
-
-
-    }, [])
 
     if (loading) {
         return <>
@@ -115,20 +111,28 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                     </Center>
 
                     {/* Complete Post Logic and Rendering */}
-                    {data &&
-                        <Text>{data?.data['employees'][0]['business_email']}</Text>
 
-                    }
-                    {/* {data && <EnrichCard
+                    {data && <EnrichCard
                         items={data?.data['employees']}
-                        render={(item: RootObject) => <>
-                            <Box borderWidth={1} borderColor={useColorModeValue(colors.ebony, colors.lightGray)}>
-                                <Text>{item.first_name}</Text>
-                                <Text>{item.last_name}</Text>
+                        render={(item: RootObject,) =>
+                            <Box mx={3} my={3} borderWidth={1} borderRadius={'xl'} borderColor={borcol} bgColor={bgcol}  >
+                                <VStack alignItems={'center'} >
+                                    <HStack alignItems={'center'} space={'1'}>
+                                        <Text color={colors.lightGray}>{item.first_name}</Text>
+                                        <Text>{item.last_name}</Text>
+                                    </HStack>
+                                    <Text>{item.job_title}</Text>
+                                </VStack>
+                                <VStack alignItems={'center'}>
+                                    {item.business_email !== "" ? <Text>{item.business_email}</Text> : <Text>No Business Email found</Text>}
+                                    {item.personal_email !== "" ? <Text>{item.personal_email}</Text> : <Text>No Personal Email found</Text>}
+                                    {item.phone !== "" ? <Text>{item.phone}</Text> : <Text>No Phone Number found</Text>}
+                                    {item.social_url !== "" ? <Text>{item.social_url}</Text> : <Text>No Social Url found</Text>}
+                                </VStack>
                             </Box>
-                        </>
+
                         }
-                    />} */}
+                    />}
 
 
                 </>
