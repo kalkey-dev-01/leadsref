@@ -69,11 +69,10 @@ export type ListComponent = <T>(
 
 
 const EnrichCard: ListComponent = ({ items, render }) => {
-    let bgcol = useColorModeValue(colors.lightGray, colors.ebony)
-    let borcol = useColorModeValue(colors.ebony, colors.lightGray)
+    
     return (
         <View>
-            {items.slice(0, 5).map((item) => <>{render(item)}</>)}
+            {items.slice(0,5).map((item, index) => <Box key={index}>{render(item)}</Box>)}
         </View>
 
     )

@@ -11,6 +11,7 @@ import axios, { AxiosResponse } from 'axios';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Animated, { useAnimatedStyle, withTiming, withSpring, useSharedValue } from 'react-native-reanimated'
 import { apikey, employeesApi } from '../api/apikey';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 interface EnrichCompanyProps {
 
 }
@@ -53,6 +54,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
     const [loading, setLoading] = React.useState<boolean>(false)
     let bgcol = useColorModeValue(colors.lightGray, colors.ebony)
     let borcol = useColorModeValue(colors.ebony, colors.lightGray)
+
     const {
         values, handleBlur, handleChange, handleSubmit, errors
     } = useFormik({
@@ -65,12 +67,9 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
             setLoading(true)
             axios.post(employeesApi, { "api_key": apikey, 'domain': values.domain })
                 .then((res) => {
-
-
                     setData(res)
                 }).catch((e) => console.log(e))
                 .finally(() => {
-
                     setLoading(false)
                 })
         }
@@ -80,7 +79,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
 
     if (loading) {
         return <>
-            <View bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
+            <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
                 <Center>
                     <Text fontSize={'lg'}>Loading</Text>
                 </Center>
@@ -101,10 +100,13 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                     <Input mx={'5'} variant={'rounded'} placeholder={'Enter The domain'} placeholderTextColor={useColorModeValue(colors.coolGray, colors.lightGray)}
                         onChangeText={handleChange('domain')} onBlur={handleBlur('domain')} value={values.domain} autoCapitalize={'none'} autoCorrect={false}
                         borderColor={errors.domain ? useColorModeValue(colors.gray, colors.coolGray) : useColorModeValue(colors.gray, colors.coolGray)}
-                        InputRightElement={<SearchCircleIcon size={25} color={useColorModeValue(colors.ebony, colors.white)} style={{ marginHorizontal: 15 }}
-                            onPress={async () => {
+                        InputRightElement={
+                            <TouchableOpacity onPress={async () => {
                                 handleSubmit()
-                            }} />}
+                            }}>
+                                <SearchCircleIcon size={25} color={useColorModeValue(colors.ebony, colors.white)} style={{ marginHorizontal: 15 }} />
+                            </TouchableOpacity>
+                        }
                     />
                     <Center>
                         {errors.domain && <Text fontSize={'xs'} mt={'0.5'} mb={'1'} >{errors.domain}</Text>}
@@ -118,7 +120,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                             <Box mx={3} my={3} borderWidth={1} borderRadius={'xl'} borderColor={borcol} bgColor={bgcol}  >
                                 <VStack alignItems={'center'} >
                                     <HStack alignItems={'center'} space={'1'}>
-                                        <Text color={colors.lightGray}>{item.first_name}</Text>
+                                        <Text>{item.first_name}</Text>
                                         <Text>{item.last_name}</Text>
                                     </HStack>
                                     <Text>{item.job_title}</Text>

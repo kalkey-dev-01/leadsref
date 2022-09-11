@@ -9,11 +9,13 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/raleway": "^0.2.2",
     "@react-navigation/material-top-tabs": "^6.2.3",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/stack": "^6.2.3",
     "axios": "^0.27.2",
     "expo": "~46.0.9",
+    "expo-font": "~10.2.0",
     "expo-linking": "~3.2.2",
     "expo-status-bar": "~1.4.0",
     "firebase": "8.2.3",
