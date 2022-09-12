@@ -9,6 +9,7 @@ import { EyeIcon, EyeOffIcon } from 'react-native-heroicons/outline';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { firebase, db } from '../../firebase'
 import { Alert } from 'react-native'
+import { Fonts, StyledText } from '../utils/fontText';
 
 interface RegisterScreenProps {
 
@@ -18,6 +19,7 @@ interface RegisterScreenProps {
 
 
 export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
+    const [loading, setLoading] = React.useState<boolean>(false)
     const {
         values, handleBlur, handleChange, handleSubmit, errors
     } = useFormik({
@@ -28,13 +30,46 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
             confirmPassword: ''
         }, validationSchema: signUpSchema,
         onSubmit: (values) => {
+
             SignUp(values.email, values.confirmPassword, values.username)
-            console.log('Submitted to Firebase');
+
 
         },
     });
     const [open, setOpen] = React.useState<boolean>(false)
+    const SignUp = async (email: string, password: string, name: string) => {
+        setLoading(true)
+        try {
+            const authUser = await firebase.auth().createUserWithEmailAndPassword(email, password)
+            db.collection('users').doc(authUser.user?.uid).set({
+                uid: authUser.user?.uid,
+                name: name,
+                email: authUser.user?.email
+            })
+            // db.collection('users').add({
+            //     uid: authUser.user?.uid,
+            //     name: name,
+            //     email: authUser.user?.email
+            // })
 
+        } catch (error: any) {
+            Alert.alert('Error Caused while Sign up', error.message)
+        }
+        setLoading(false)
+    }
+
+
+    if (loading) {
+        return (
+            <>
+                <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
+                    <Center mt={10}>
+                        <StyledText content='Loading Please Wait' fontSize={45} fontFamily={Fonts.RwBlack} />
+                    </Center>
+                </View>
+            </>
+        )
+    }
 
     return (
         <SafeAreaView style={{ backgroundColor: colors.ebony }}>
@@ -117,9 +152,8 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
                             </Box>
                         </>
                         <Center mb={'2'}>
-                            <TouchableOpacity onPress={() => {
-                                SignUp(values.email, values.confirmPassword, values.username)
-                                console.log('Firebase Sign Up function');
+                            <TouchableOpacity onPress={async () => {
+                                handleSubmit()
                             }}>
                                 <Box borderColor={colors.lightGray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'2'}>
                                     <Text color={colors.lightGray} fontWeight={'black'} fontSize={'lg'}>Sign Up</Text>
@@ -131,22 +165,4 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
             </KeyboardAwareScrollView>
         </SafeAreaView>
     );
-}
-const SignUp = async (email: string, password: string, name: string) => {
-    try {
-        const authUser = await firebase.auth().createUserWithEmailAndPassword(email, password)
-        db.collection('users').doc(authUser.user?.uid).set({
-            uid: authUser.user?.uid,
-            name: name,
-            email: authUser.user?.email
-        })
-        // db.collection('users').add({
-        //     uid: authUser.user?.uid,
-        //     name: name,
-        //     email: authUser.user?.email
-        // })
-
-    } catch (error: any) {
-        Alert.alert('Error Caused while Sign up', error.message)
-    }
 }

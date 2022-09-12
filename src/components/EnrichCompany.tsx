@@ -50,11 +50,11 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
 
     if (loading) {
         return <>
-            <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-                <Center>
-                    <Text fontSize={'lg'}>Loading</Text>
-                </Center>
-            </View>
+             <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
+                    <Center mt={10}>
+                        <StyledText content='Loading Please Wait' fontSize={45} fontFamily={Fonts.RwBlack} />
+                    </Center>
+                </View>
         </>
 
     }
@@ -70,8 +70,9 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                             <IdentificationIcon size={30} color={useColorModeValue(colors.ebony, colors.white)} />
                         </Box>
                     </HStack>
-                    <Input mx={'5'} variant={'rounded'} placeholder={'Enter The domain'} placeholderTextColor={useColorModeValue(colors.coolGray, colors.lightGray)}
-                        onChangeText={handleChange('domain')} onBlur={handleBlur('domain')} value={values.domain} autoCapitalize={'none'} autoCorrect={false}
+                    <Input fontFamily={Fonts.RwMed} mx={'5'} variant={'rounded'} placeholder={'Enter The domain'} placeholderTextColor={useColorModeValue(colors.coolGray, colors.lightGray)}
+                        
+                        blurOnSubmit={true} onChangeText={handleChange('domain')} onBlur={handleBlur('domain')} value={values.domain} autoCapitalize={'none'} autoCorrect={false}
                         borderColor={errors.domain ? useColorModeValue(colors.gray, colors.coolGray) : useColorModeValue(colors.gray, colors.coolGray)}
                         InputRightElement={
                             <TouchableOpacity onPress={async () => {
@@ -82,7 +83,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                         }
                     />
                     <Center>
-                        {errors.domain && <Text fontSize={'xs'} mt={'0.5'} mb={'1'} >{errors.domain}</Text>}
+                        {errors.domain && <StyledText fontSize={12} mt={1} mb={'1'} fontFamily={Fonts.RwSemiBold} content={errors.domain} />}
                     </Center>
 
                     {/* Complete Post Logic and Rendering */}

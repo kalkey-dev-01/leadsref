@@ -11,11 +11,13 @@ import { Alert } from 'react-native'
 import { loginSchema } from '../utils/form-validation';
 import { firebase } from '../../firebase'
 import { useNavigation } from '@react-navigation/native';
+import { Fonts, StyledText } from '../utils/fontText';
 
 interface LoginScreenProps {
 
 }
 export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
+    const [loading, setLoading] = React.useState<boolean>(false)
     const {
         values, handleBlur, handleChange, handleSubmit, errors
     } = useFormik({
@@ -26,11 +28,35 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
         }, validationSchema: loginSchema,
         onSubmit: () => {
 
+            Login(values.email, values.password)
+
         },
     });
     const nav = useNavigation()
     const [open, setOpen] = React.useState<boolean>(false)
+    const Login = async (email: string, password: string) => {
+        setLoading(true)
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(() => console.log(firebase.auth().currentUser))
 
+        } catch (error: any) {
+            Alert.alert('Error caused while login', error.message)
+        }
+        setLoading(false)
+    }
+
+    if (loading) {
+        return (
+            <>
+                <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
+                    <Center mt={10}>
+                        <StyledText content='Loading Please Wait' fontSize={45} fontFamily={Fonts.RwBlack} />
+                    </Center>
+                </View>
+            </>
+        )
+    }
 
     return (
 
@@ -38,7 +64,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
             <KeyboardAwareScrollView style={{ backgroundColor: colors.ebony, height: '100%' }} enableOnAndroid={true}>
                 <View bg={colors.ebony} h={'full'} >
 
-                    
+
                     <Center mt={'1'} pb={'2.5'} borderBottomColor={'white'} borderWidth={0.75}>
                         <Heading bold size={'2xl'} color={'white'}>Welcome Back</Heading>
                         <Heading size={'lg'} color={'white'}>Login to Leadistro</Heading>
@@ -87,10 +113,9 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
                     </Box>
                     <Center mb={'2'}>
                         <TouchableOpacity onPress={() => {
-                            console.log(values.email)
-                            console.log(values.password);
-                            Login(values.email, values.password)
-                            console.log('firebase login func');
+
+                            handleSubmit()
+
                         }}>
                             <Box mt={'2'} borderColor={colors.gray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'2'}>
                                 <Text color={colors.gray} fontWeight={'black'} fontSize={'lg'}>Login</Text>
@@ -99,7 +124,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
                     </Center>
                     <Center mb={'2'}>
                         <TouchableOpacity onPress={() => {
-                           nav.navigate('register' as never)
+                            nav.navigate('register' as never)
                         }}>
                             <Box mt={'2'} borderColor={colors.coolGray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'2'}>
                                 <Text color={colors.white} fontWeight={'black'} fontSize={'lg'}>Dont have an account? Sign-Up</Text>
@@ -110,13 +135,4 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
             </KeyboardAwareScrollView>
         </SafeAreaView>
     );
-}
-const Login = async (email: string, password: string) => {
-    try {
-        await firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(() => console.log(firebase.auth().currentUser))
-
-    } catch (error: any) {
-        Alert.alert('Error caused while login', error.message)
-    }
 }
