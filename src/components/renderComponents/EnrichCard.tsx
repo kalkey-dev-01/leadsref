@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { Box, Center, Text, useColorModeValue, View } from 'native-base';
 import React, { FC, useEffect } from 'react'
 import colors from '../../utils/colors';
-interface RootObject {
+export interface RootObject {
     first_name: string;
     last_name: string;
     headline: string;

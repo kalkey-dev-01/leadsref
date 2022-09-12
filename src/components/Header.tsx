@@ -19,7 +19,7 @@ export const Header: React.FC<HeaderProps> = ({ }) => {
         <Box borderBottomWidth={'2'} mt={'0.5'} borderBottomColor={useColorModeValue(colors.ebony, colors.lightGray)} backgroundColor={useColorModeValue(colors.lightGray, colors.ebony)}>
             <HStack alignItems={'center'}   justifyContent={'space-evenly'}>
                 <Text fontSize={30} style={{fontFamily: 'Raleway_700Bold'}}>
-                    Leadistro
+                    leadistro
                 </Text>
                 <SettingsIcon size={27.5} color={useColorModeValue(colors.ebony, colors.lightGray)} onPress={() => nav.navigate('settings' as never)} />
             </HStack>
