@@ -31,15 +31,16 @@ interface Props {
     px?: string | number,
     py?: string | number,
     letterSpacing?: string | number
+    numofLines?:  number
 }
 
 export const StyledText: React.FC<Props> = ({
-    content, fontFamily, fontSize, my, mx, pb, pt, pl, pr, letterSpacing, mb, mt, ml, mr, py, px
+    content, fontFamily, fontSize, my, mx, pb, pt, pl, pr, letterSpacing, mb, mt, ml, mr, py, px , numofLines
 }) => {
     return (
         <Text color={useColorModeValue(colors.ebony, colors.white)} mb={mb} mt={mt} mr={mr} ml={ml}
             mx={mx} py={py} px={px} my={my} pb={pb} pt={pt} pl={pl} pr={pr} letterSpacing={letterSpacing}
-            fontSize={fontSize} style={{ fontFamily: fontFamily }}>
+            fontSize={fontSize} style={{ fontFamily: fontFamily }} textAlign={'center'} numberOfLines={numofLines}  adjustsFontSizeToFit={true}>
             {content}
         </Text>
     )

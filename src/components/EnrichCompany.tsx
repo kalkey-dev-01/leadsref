@@ -1,6 +1,6 @@
 import { Box, Center, Heading, HStack, Input, Text, useColorModeValue, View, VStack } from 'native-base'
 import React, { useCallback, useEffect } from 'react'
-import { IdentificationIcon, SearchCircleIcon, MailIcon } from 'react-native-heroicons/outline';
+import { IdentificationIcon, SearchCircleIcon, MailIcon , UserGroupIcon } from 'react-native-heroicons/outline';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../utils/colors';
 import { firebase } from '../../firebase'
@@ -56,7 +56,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
         return <>
             <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.coolGray)}>
                 <VStack alignItems={'center'} mt={5}>
-                    <StyledText mx={5} letterSpacing={3} content='leadistro is checking the leads for you' fontSize={30} fontFamily={Fonts.RwBold} />
+                    <StyledText mx={5} letterSpacing={1} content='leadistro is checking the leads for you' fontSize={30} fontFamily={Fonts.RwBold} />
                     <Loading />
                 </VStack>
             </View>
@@ -72,7 +72,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                     <HStack justifyContent={'space-between'} alignItems={'center'} mx={'4'} my={'3'}>
                         <StyledText content='Search Employees Information' fontFamily={Fonts.RwExBold} fontSize={20} />
                         <Box pt={1.5}>
-                            <IdentificationIcon size={30} color={useColorModeValue(colors.ebony, colors.white)} />
+                            <UserGroupIcon size={30} color={useColorModeValue(colors.ebony, colors.white)} />
                         </Box>
                     </HStack>
                     <Input fontFamily={Fonts.RwSemiBold} mx={'5'} variant={'rounded'} placeholder={'Enter The domain'} placeholderTextColor={useColorModeValue(colors.coolGray, colors.lightGray)}
