@@ -15,6 +15,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Fonts, StyledText } from '../utils/fontText';
 import { AtSymbolIcon } from 'react-native-heroicons/solid';
 import { Alert } from 'react-native'
+import { Ecard } from './renderComponents/Ecard';
+import Loading from '../utils/loadingUI';
+import AnimatedLottieView from 'lottie-react-native';
 interface EnrichCompanyProps {
 
 }
@@ -25,6 +28,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
     const [loading, setLoading] = React.useState<boolean>(false)
     let bgcol = useColorModeValue(colors.lightGray, colors.ebony)
     let borcol = useColorModeValue(colors.ebony, colors.lightGray)
+
 
     const {
         values, handleBlur, handleChange, handleSubmit, errors
@@ -50,11 +54,12 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
 
     if (loading) {
         return <>
-             <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-                    <Center mt={10}>
-                        <StyledText content='Loading Please Wait' fontSize={45} fontFamily={Fonts.RwBlack} />
-                    </Center>
-                </View>
+            <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.coolGray)}>
+                <VStack alignItems={'center'} mt={5}>
+                    <StyledText mx={5} letterSpacing={3} content='leadistro is checking the leads for you' fontSize={30} fontFamily={Fonts.RwBold} />
+                    <Loading />
+                </VStack>
+            </View>
         </>
 
     }
@@ -63,15 +68,15 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
     return (
         <KeyboardAwareScrollView style={{ backgroundColor: useColorModeValue(colors.lightGray, colors.ebony), height: '100%' }} enableOnAndroid={true}>
             <View h={'full'} borderTopColor={useColorModeValue(colors.coolGray, colors.white)} borderTopWidth={'0.5'} backgroundColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-                <> 
+                <>
                     <HStack justifyContent={'space-between'} alignItems={'center'} mx={'4'} my={'3'}>
                         <StyledText content='Search Employees Information' fontFamily={Fonts.RwExBold} fontSize={20} />
                         <Box pt={1.5}>
                             <IdentificationIcon size={30} color={useColorModeValue(colors.ebony, colors.white)} />
                         </Box>
                     </HStack>
-                    <Input fontFamily={Fonts.RwMed} mx={'5'} variant={'rounded'} placeholder={'Enter The domain'} placeholderTextColor={useColorModeValue(colors.coolGray, colors.lightGray)}
-                        
+                    <Input fontFamily={Fonts.RwSemiBold} mx={'5'} variant={'rounded'} placeholder={'Enter The domain'} placeholderTextColor={useColorModeValue(colors.coolGray, colors.lightGray)}
+
                         blurOnSubmit={true} onChangeText={handleChange('domain')} onBlur={handleBlur('domain')} value={values.domain} autoCapitalize={'none'} autoCorrect={false}
                         borderColor={errors.domain ? useColorModeValue(colors.gray, colors.coolGray) : useColorModeValue(colors.gray, colors.coolGray)}
                         InputRightElement={
@@ -92,46 +97,7 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                         items={data?.data['employees']}
                         render={(item: RootObject,) =>
                             <Box mx={3} my={3} borderWidth={1} borderRadius={'xl'} borderColor={borcol} bgColor={bgcol}  >
-                                <VStack alignItems={'center'} justifyContent={'space-evenly'} >
-                                    <HStack alignItems={'center'} space={'1'}>
-                                        <StyledText content={item.first_name} fontFamily={'Raleway_400Regular'} fontSize={22} />
-                                        <StyledText content={item.last_name} fontFamily={'Raleway_300Light'} fontSize={22} />
-                                    </HStack>
-                                    <StyledText content={item.job_title} fontFamily={'Raleway_600SemiBold'} fontSize={18} />
-                                </VStack>
-                                <VStack alignItems={'center'}>
-                                    {
-                                        item.business_email !== ""
-                                            ?
-                                            <HStack alignItems={'center'} mx={'1'} my={'0.5'} space={2} >
-                                                <AtSymbolIcon color={useColorModeValue(colors.ebony, colors.white)} size={30} />
-                                                <StyledText content={item.business_email} fontFamily={'Raleway_500Medium'} fontSize={20} />
-                                            </HStack>
-                                            :
-                                            <Text>No Business Email found</Text>
-                                    }
-                                    {
-                                        item.personal_email !== ""
-                                            ?
-                                            <Text>{item.personal_email}</Text>
-                                            :
-                                            <Text>No Personal Email found</Text>
-                                    }
-                                    {
-                                        item.phone !== ""
-                                            ?
-                                            <Text>{item.phone}</Text>
-                                            :
-                                            <Text>No Phone Number found</Text>
-                                    }
-                                    {
-                                        item.social_url !== ""
-                                            ?
-                                            <Text>{item.social_url}</Text>
-                                            :
-                                            <Text>No Social Url found</Text>
-                                    }
-                                </VStack>
+                                <Ecard item={item} />
                             </Box>
 
                         }

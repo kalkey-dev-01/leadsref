@@ -72,7 +72,7 @@ const EnrichCard: ListComponent = ({ items, render }) => {
     
     return (
         <View>
-            {items.slice(0,5).map((item, index) => <Box key={index}>{render(item)}</Box>)}
+            {items.slice(0,5).map((item, index) => <Box key={index.toString()}>{render(item)}</Box>)}
         </View>
 
     )
