@@ -11,7 +11,7 @@ export interface RootObject {
     business_email: string;
     personal_email: string;
     phone: string;
-    social_url: string;
+    social_url: string | boolean
     description: string;
     company_name: string;
     keywords: any[];
