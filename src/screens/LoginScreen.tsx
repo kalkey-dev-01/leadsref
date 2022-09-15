@@ -1,5 +1,5 @@
 
-import { Box, Button, Center, FormControl, Heading, Image, Input, Text, useColorModeValue, View } from 'native-base'
+import { Box, Button, Center, FormControl, Heading, Image, Input, Text, useColorModeValue, View, VStack } from 'native-base'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import colors from '../utils/colors';
@@ -12,6 +12,7 @@ import { loginSchema } from '../utils/form-validation';
 import { firebase } from '../../firebase'
 import { useNavigation } from '@react-navigation/native';
 import { Fonts, StyledText } from '../utils/fontText';
+import Loading from '../utils/loadingUI';
 
 interface LoginScreenProps {
 
@@ -49,12 +50,15 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
     if (loading) {
         return (
             <>
-                <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-                    <Center mt={10}>
-                        <StyledText content='Loading Please Wait' fontSize={45} fontFamily={Fonts.RwBlack} />
-                    </Center>
-                </View>
-            </>
+            <VStack alignItems={'center'} pt={20} bgColor={useColorModeValue(colors.white, colors.ebony)}>
+                <StyledText content={`Leadistro is logging you In`} fontFamily={Fonts.RwBold} fontSize={15} />
+                <StyledText content={`${values.email}`} fontFamily={Fonts.RwSemiBold} fontSize={12.5} />
+                <Center h={'full'}>
+                    <Loading />
+                </Center>
+
+            </VStack>
+        </>
         )
     }
 

@@ -1,4 +1,4 @@
-import { Box, Button, Center, FormControl, Heading, Image, Input, Text, useColorModeValue, View } from 'native-base'
+import { Box, Button, Center, FormControl, Heading, Image, Input, Text, useColorModeValue, View, VStack } from 'native-base'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import colors from '../utils/colors';
@@ -10,6 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { firebase, db } from '../../firebase'
 import { Alert } from 'react-native'
 import { Fonts, StyledText } from '../utils/fontText';
+import Loading from '../utils/loadingUI';
 
 interface RegisterScreenProps {
 
@@ -62,12 +63,15 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
     if (loading) {
         return (
             <>
-                <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-                    <Center mt={10}>
-                        <StyledText content='Loading Please Wait' fontSize={45} fontFamily={Fonts.RwBlack} />
-                    </Center>
-                </View>
-            </>
+            <VStack alignItems={'center'} pt={20} bgColor={useColorModeValue(colors.white, colors.ebony)}>
+                <StyledText content={`Leadistro is Registering Your Account`} fontFamily={Fonts.RwBold} fontSize={15} />
+                <StyledText content={`Thank You for Using Leadistro ${values.username}`} fontFamily={Fonts.RwSemiBold} fontSize={10} />
+                <Center h={'full'}>
+                    <Loading />
+                </Center>
+
+            </VStack>
+        </>
         )
     }
 
@@ -77,7 +81,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
                 <View bgColor={colors.ebony} h={'full'}>
                     {/* Sign In Form*/}
                     <Heading mt={'2'} size={'xl'} color={colors.lightGray} fontWeight={'black'} textAlign={'center'}>Sign Up</Heading>
-                    <Heading mt={'4'} size={'lg'} color={colors.lightGray} textAlign={'center'} fontWeight={'semibold'}>Set up your leadRef account</Heading>
+                    <Heading mt={'4'} size={'lg'} color={colors.lightGray} textAlign={'center'} fontWeight={'semibold'}>Set up your Leadistro</Heading>
                     <View bgColor={colors.ebony} h={'full'} mt={'2'}>
                         {/* Form Validation */}
                         <Center pt={4} mb={'5'} backgroundColor={colors.ebony} borderBottomColor={colors.gray} borderTopColor={colors.lightGray} borderWidth={2}>
