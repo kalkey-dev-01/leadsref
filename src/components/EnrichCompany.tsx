@@ -63,12 +63,14 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
 
     if (loading) {
         return <>
-            <View h={'full'} bgColor={useColorModeValue(colors.lightGray, colors.gray)}>
-                <VStack alignItems={'center'} mt={5}>
-                    <StyledText mx={5} letterSpacing={1} content='leadistro is checking the leads for you' fontSize={30} fontFamily={Fonts.RwBold} />
+            <VStack alignItems={'center'} bgColor={useColorModeValue(colors.white, colors.ebony)}>
+                <StyledText content={`Leadistro is Searching`} fontFamily={Fonts.RwBold} fontSize={20} />
+                <StyledText content={`${values.domain}`} fontFamily={Fonts.RwSemiBold} fontSize={25} />
+                <Center h={'full'}>
                     <Loading />
-                </VStack>
-            </View>
+                </Center>
+
+            </VStack>
         </>
 
     }
