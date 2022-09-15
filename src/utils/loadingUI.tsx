@@ -2,6 +2,7 @@ import { View, Text, VStack, Box, Center, AspectRatio } from 'native-base'
 import React from 'react'
 import AnimatedLottieView from 'lottie-react-native'
 import { Fonts, StyledText } from './fontText'
+import colors from './colors'
 
 
 const Loading: React.FC<{}> = ({ }) => {

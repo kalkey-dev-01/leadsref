@@ -14,13 +14,13 @@ export interface RootObject {
     social_url: string | boolean
     description: string;
     company_name: string;
-    keywords: any[];
+    keywords: string[];
     connections_count: string;
     picture: string;
     city: string;
     linkedin_id: number;
-    skills: string;
-    past_company: any[];
+    skills: string[];
+    past_company: string[];
     rewards: any[];
     industry: string;
     company_domain: string;
@@ -72,7 +72,7 @@ const EnrichCard: ListComponent = ({ items, render }) => {
     
     return (
         <View>
-            {items.slice(0,5).map((item, index) => <Box key={index.toString()}>{render(item)}</Box>)}
+            {items.slice(0,9).map((item, index) => <Box key={index.toString()}>{render(item)}</Box>)}
         </View>
 
     )

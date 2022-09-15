@@ -1,6 +1,6 @@
-import { Box, HStack, useColorModeValue, VStack } from 'native-base'
+import { Box, Circle, HStack, useColorModeValue, VStack } from 'native-base'
 import React from 'react'
-import { UserCircleIcon, MailIcon, AtSymbolIcon, ExclamationCircleIcon, PhoneIcon, GlobeIcon, GlobeAltIcon, MapIcon, LinkIcon, IdentificationIcon, KeyIcon, UsersIcon, TableIcon } from 'react-native-heroicons/outline';
+import { UserCircleIcon, MailIcon, AtSymbolIcon, ExclamationCircleIcon, PhoneIcon, GlobeIcon, GlobeAltIcon, MapIcon, LinkIcon, IdentificationIcon, KeyIcon, UsersIcon, TableIcon, ArrowCircleDownIcon } from 'react-native-heroicons/outline';
 import colors from '../../utils/colors';
 import { Fonts, StyledText } from '../../utils/fontText';
 import { RootObject } from './EnrichCard';
@@ -14,10 +14,13 @@ interface EcardProps {
 
 export const Ecard: React.FC<EcardProps> = ({ item }) => {
     const icoCol = useColorModeValue(colors.ebony, colors.lightGray)
+    const [show, setShow] = React.useState<boolean>(false)
+
 
     return (
         <>
             <VStack alignItems={'flex-start'} space={1} px={2.5} py={1.5}>
+
                 <HStack alignItems={'center'} w={'full'} justifyContent={'space-between'} justifyItems={'center'} >
 
                     <Box>
@@ -29,6 +32,8 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                     <UserCircleIcon color={useColorModeValue(colors.ebony, colors.white)} size={50} />
 
                 </HStack>
+
+
                 {
                     item.job_title &&
                     <HStack alignItems={'center'} space={'2'}>
@@ -36,6 +41,7 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                         <StyledText content={item.job_title} fontFamily={Fonts.RwSemiBold} fontSize={12} py={1} pb={1} pr={5} numofLines={1} />
                     </HStack>
                 }
+
                 {
                     item.location &&
                     <HStack alignItems={'center'} space={'2'}>
@@ -104,9 +110,9 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                                 }, [item.social_url])
                             }>
                                 <HStack alignItems={'center'} space={'2'}>
-                                <LinkIcon color={icoCol} size={22.5} />
-                                <TableIcon color={icoCol} size={22.5} />
-                                    
+                                    <LinkIcon color={icoCol} size={22.5} />
+                                    <TableIcon color={icoCol} size={22.5} />
+
                                     <StyledText content={`LinkedIn Sales Navigator`} fontFamily={Fonts.RwExBold} fontSize={15} py={1} pb={1} numofLines={1} />
                                 </HStack>
                             </TouchableOpacity>
@@ -132,15 +138,93 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                             </TouchableOpacity>
                         </>
                 }
-                {
-                    item.keywords && item.keywords.map((items, index) => {
-                        <HStack alignItems={'center'} space={2}>
-                            <KeyIcon color={icoCol} size={22.5} />
-                            <StyledText key={index} content={items} fontFamily={Fonts.RwBold} py={1} pb={1} numofLines={1} fontSize={15} />
-                        </HStack>
-                    })
-                }
 
+
+
+                {
+                    item.keywords.length > 0
+                        ?
+                        <VStack alignItems={'flex-start'} space={0.5}>
+                            <TouchableOpacity onPress={React.useCallback(() => {
+                                setShow(!show)
+                            }, [show])}>
+                                <HStack alignItems={'center'} space={2}>
+                                    <KeyIcon color={icoCol} size={22.5} />
+                                    <StyledText pb={0.5} content='Keywords' fontFamily={Fonts.RwSemiBold} />
+                                    <ArrowCircleDownIcon color={icoCol} size={15} />
+
+                                </HStack>
+                            </TouchableOpacity>
+                            {show &&
+                                item.keywords.slice(0, 2).map((item, index) =>
+                                    <HStack key={index} alignItems={'center'} space={2}>
+                                        <Circle bgColor={icoCol} size={7.5} mx={2} />
+                                        <StyledText content={item} fontFamily={Fonts.RwReg} pb={1} numofLines={1} fontSize={15} />
+                                    </HStack>
+                                )
+
+                            }
+
+                        </VStack>
+                        :
+                        null
+                }
+                {
+                    item.past_company.length > 0
+                        ?
+                        <VStack alignItems={'flex-start'} space={0.5}>
+                            <TouchableOpacity onPress={React.useCallback(() => {
+                                setShow(!show)
+                            }, [show])}>
+                                <HStack alignItems={'center'} space={2}>
+                                    <KeyIcon color={icoCol} size={22.5} />
+                                    <StyledText pb={0.5} content='Past Companies' fontFamily={Fonts.RwSemiBold} />
+                                    <ArrowCircleDownIcon color={icoCol} size={15} />
+
+                                </HStack>
+                            </TouchableOpacity>
+                            {show &&
+                                item.past_company.map((item, index) =>
+                                    <HStack key={index} alignItems={'center'} space={2}>
+                                        <Circle bgColor={icoCol} size={7.5} mx={2} />
+                                        <StyledText content={item} fontFamily={Fonts.RwReg} pb={1} numofLines={1} fontSize={15} />
+                                    </HStack>
+                                )
+
+                            }
+
+                        </VStack>
+                        :
+                        null
+                }
+                {
+                    item.skills.length > 0
+                        ?
+                        <VStack alignItems={'flex-start'} space={0.5}>
+                            <TouchableOpacity onPress={React.useCallback(() => {
+                                setShow(!show)
+                            }, [show])}>
+                                <HStack alignItems={'center'} space={2}>
+                                    <KeyIcon color={icoCol} size={22.5} />
+                                    <StyledText pb={0.5} content='Skills' fontFamily={Fonts.RwBold} />
+                                    <ArrowCircleDownIcon color={icoCol} size={15} />
+
+                                </HStack>
+                            </TouchableOpacity>
+                            {show &&
+                                item.skills.slice(0,4).map((item, index) =>
+                                    <HStack key={index} alignItems={'center'} space={2}>
+                                        <Circle bgColor={icoCol} size={7.5} mx={2} />
+                                        <StyledText content={item} fontFamily={Fonts.RwReg} pb={1} numofLines={1} fontSize={15} />
+                                    </HStack>
+                                )
+
+                            }
+
+                        </VStack>
+                        :
+                        null
+                }
 
             </VStack>
         </>
