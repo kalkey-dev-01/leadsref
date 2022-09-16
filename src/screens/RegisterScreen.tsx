@@ -63,15 +63,16 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
     if (loading) {
         return (
             <>
-            <VStack alignItems={'center'} pt={20} bgColor={useColorModeValue(colors.white, colors.ebony)}>
-                <StyledText content={`Leadistro is Registering Your Account`} fontFamily={Fonts.RwBold} fontSize={15} />
-                <StyledText content={`Thank You for Using Leadistro ${values.username}`} fontFamily={Fonts.RwSemiBold} fontSize={10} />
-                <Center h={'full'}>
-                    <Loading />
-                </Center>
+                <VStack alignItems={'center'} pt={20} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
+                    <StyledText content={`Leadistro is Registering Your Account`} fontFamily={Fonts.RwSemiBold} fontSize={20} />
+                    <StyledText content={`Thank You for Using Leadistro `} fontFamily={Fonts.RwSemiBold} fontSize={17.5} />
+                    <StyledText content={`${values.username}`} fontFamily={Fonts.RwSemiBold} fontSize={17.5} />
+                    <Center h={'full'}>
+                        <Loading />
+                    </Center>
 
-            </VStack>
-        </>
+                </VStack>
+            </>
         )
     }
 
@@ -80,45 +81,49 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
             <KeyboardAwareScrollView style={{ backgroundColor: colors.ebony, height: '100%' }} enableOnAndroid={true}>
                 <View bgColor={colors.ebony} h={'full'}>
                     {/* Sign In Form*/}
-                    <Heading mt={'2'} size={'xl'} color={colors.lightGray} fontWeight={'black'} textAlign={'center'}>Sign Up</Heading>
-                    <Heading mt={'4'} size={'lg'} color={colors.lightGray} textAlign={'center'} fontWeight={'semibold'}>Set up your Leadistro</Heading>
+                    <StyledText content='Sign Up' textAlign={'center'} fontFamily={Fonts.RwBlack} fontSize={30} letterSpacing={1} />
+                    <StyledText content='Set up your Leadistro' textAlign={'center'} fontFamily={Fonts.RwSemiBold} fontSize={25} />
+
                     <View bgColor={colors.ebony} h={'full'} mt={'2'}>
                         {/* Form Validation */}
                         <Center pt={4} mb={'5'} backgroundColor={colors.ebony} borderBottomColor={colors.gray} borderTopColor={colors.lightGray} borderWidth={2}>
                             <Image backgroundColor={colors.ebony} source={require('../../assets/leedVec.png')} alt={'lOGO'} h={220 / 2} w={350 / 2} />
-                            <Text mx={'4'} my={'3'} textAlign={'center'} fontSize={'sm'} color={'white'} fontWeight={'black'} >
-                                Leadistro is a tool for Individuals or small Startup owners
-                                who want to collect obtainable data from domains
-                                and use it to create a list of potential prospects
-                                to whom you may mark as a lead.
-                            </Text>
+                            <StyledText content={
+                                `Leadistro is a tool for Individuals or small Startup owners who want to collect obtainable data from domains and use it to create a list of potential prospects to whom you may mark as a lead.`
+                            } textAlign={'center'} fontFamily={Fonts.RwLight}
+                                mx={6} my={3}
+                            />
+
+
                         </Center>
                         <>
                             <Center mx={'3'} px={'2'} backgroundColor={colors.ebony} borderColor={colors.lightGray} borderWidth={'2'} my={'1'} py={'1'} rounded={'full'}>
-                                <Text fontSize={'md'} fontWeight={'bold'} color={colors.lightGray} >Create an Account for yourself</Text>
+                                <StyledText content='Create an Account for yourself' fontFamily={Fonts.RwExBold} fontSize={16} mb={0.5} />
                             </Center>
-                            <Box mx={'3'} mt={'3'} >
+                            <Box mx={'3'} mt={'3'} mb={2} >
                                 <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Enter Your Email'} autoCapitalize={'none'} autoCorrect={false}
                                     value={values.email}
-
+                                    fontFamily={Fonts.RwBold}
                                     onChangeText={handleChange('email')}
                                     onBlur={handleBlur('email')} accessibilityLabel={'Email'}
                                     borderColor={errors.confirmPassword ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                                 />
-                                <Text ml={'3.5'} fontSize={'xs'} color={colors.lightGray} mt={'0.5'} mb={'1'} >{errors.email}</Text>
+                                {errors.email && <StyledText ml={'3.5'} fontSize={12} fontFamily={Fonts.RwLight} my={'0.5'} pb={1} content={`${errors.email}`} />}
                             </Box>
-                            <Box mx={'3'}>
+                            <Box mx={'3'} mb={2}>
                                 <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Enter Your Name'} autoCapitalize={'none'} autoCorrect={false}
                                     value={values.username}
+                                    fontFamily={Fonts.RwBold}
                                     onChangeText={handleChange('username')}
                                     onBlur={handleBlur('username')}
                                     borderColor={errors.username ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                                 />
-                                <Text ml={'3.5'} fontSize={'xs'} color={colors.lightGray} my={'1'} >{errors.username}</Text>
+                                {errors.username && <StyledText ml={'3.5'} fontSize={12} fontFamily={Fonts.RwLight} my={'0.5'} pb={1} content={`${errors.username}`} />}
                             </Box>
-                            <Box mx={'3'}  >
+                            <Box mx={'3'} mb={2} >
                                 <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Enter Your Password'} autoCapitalize={'none'} autoCorrect={false}
                                     value={values.password}
+                                    fontFamily={Fonts.RwBold}
                                     onChangeText={handleChange('password')}
                                     onBlur={handleBlur('password')}
                                     type={open ? "text" : "password"}
@@ -133,11 +138,12 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
                                     }
                                     borderColor={errors.password ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                                 />
-                                <Text ml={'3.5'} fontSize={'xs'} color={colors.lightGray} mt={'0.5'} mb={'1'} >{errors.password}</Text>
+                                {errors.password && <StyledText ml={'3.5'} fontSize={12} fontFamily={Fonts.RwLight} my={'0.5'} pb={1} content={`${errors.password}`} />}
                             </Box>
-                            <Box mx={'3'} >
+                            <Box mx={'3'} mb={2} >
                                 <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Confirm Password'} autoCapitalize={'none'} autoCorrect={false}
                                     value={values.confirmPassword}
+                                    fontFamily={Fonts.RwBold}
                                     onBlur={handleBlur('confirmPassword')}
                                     onChangeText={handleChange('confirmPassword')}
                                     borderColor={errors.confirmPassword ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
@@ -152,15 +158,15 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ }) => {
                                         </>
                                     }
                                 />
-                                <Text ml={'3.5'} fontSize={'xs'} color={colors.lightGray} mt={'0.5'}  >{errors.confirmPassword}</Text>
+                                {errors.confirmPassword && <StyledText ml={'3.5'} fontSize={12} fontFamily={Fonts.RwLight} my={'0.5'} pb={1} content={`${errors.confirmPassword}`} />}
                             </Box>
                         </>
                         <Center mb={'2'}>
                             <TouchableOpacity onPress={async () => {
                                 handleSubmit()
                             }}>
-                                <Box borderColor={colors.lightGray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'2'}>
-                                    <Text color={colors.lightGray} fontWeight={'black'} fontSize={'lg'}>Sign Up</Text>
+                                <Box borderColor={colors.lightGray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'1'}>
+                                    <StyledText content={'Sign Up'} fontFamily={Fonts.RwSemiBold} mb={0.5} />
                                 </Box>
                             </TouchableOpacity>
                         </Center>

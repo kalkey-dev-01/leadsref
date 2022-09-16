@@ -50,15 +50,15 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
     if (loading) {
         return (
             <>
-            <VStack alignItems={'center'} pt={20} bgColor={useColorModeValue(colors.white, colors.ebony)}>
-                <StyledText content={`Leadistro is logging you In`} fontFamily={Fonts.RwBold} fontSize={15} />
-                <StyledText content={`${values.email}`} fontFamily={Fonts.RwSemiBold} fontSize={12.5} />
-                <Center h={'full'}>
-                    <Loading />
-                </Center>
+                <VStack alignItems={'center'} pt={20} bgColor={useColorModeValue(colors.white, colors.ebony)}>
+                    <StyledText content={`Leadistro is logging you In`} fontFamily={Fonts.RwBold} fontSize={15} />
+                    <StyledText content={`${values.email}`} fontFamily={Fonts.RwSemiBold} fontSize={12.5} />
+                    <Center h={'full'}>
+                        <Loading />
+                    </Center>
 
-            </VStack>
-        </>
+                </VStack>
+            </>
         )
     }
 
@@ -70,8 +70,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
 
 
                     <Center mt={'1'} pb={'2.5'} borderBottomColor={'white'} borderWidth={0.75}>
-                        <Heading bold size={'2xl'} color={'white'}>Welcome Back</Heading>
-                        <Heading size={'lg'} color={'white'}>Login to Leadistro</Heading>
+                        <StyledText content={'Welcome Back'} fontFamily={Fonts.RwBlack} fontSize={'2xl'} letterSpacing={2} />
+                        <StyledText content={'Login to leadistro'} fontFamily={Fonts.RwExBold} fontSize={'lg'} letterSpacing={1.5} />
 
                     </Center>
                     {/* Image */}
@@ -79,25 +79,24 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
                         <Image source={require('../../assets/leedVec.png')} alt={'lOGO'} h={220 / 2} w={350 / 2} my={'2'} />
                     </Center>
                     <Center mx={'7'} my={'2.5'}>
-                        <Text textAlign={'center'} fontSize={'lg'} fontWeight={'semibold'} color={colors.white}>
-                            Leadistro is a mobile lead generation application for email marketing
-                            and extraction of information about websites and domains.
-                        </Text>
+                        <StyledText content={`Leadistro is a mobile lead generation application for email marketing and extraction of information about websites and domains.`}
+                            fontFamily={Fonts.RwBold} fontSize={'lg'} textAlign={'center'} />
                     </Center>
                     <Box mx={'3'} mt={'3'} mb={'2'} >
                         <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'} placeholder={'Enter Your Email'} autoCapitalize={'none'} autoCorrect={false}
                             value={values.email}
-
+                            fontFamily={Fonts.RwMed}
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')} accessibilityLabel={'Email'}
                             borderColor={errors.email ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                         />
-                        <Text ml={'3.5'} fontSize={'xs'} color={colors.gray} mt={'0.5'} mb={'1'} >{errors.email}</Text>
+                        {errors.email && <StyledText content={`${errors.email}`} fontFamily={Fonts.RwLight} fontSize={'xs'} ml={3.5} my={0.5} />}
                     </Box>
                     <Box mx={'3'}  >
                         <Input bgColor={useColorModeValue(colors.white, colors.ebony)} variant={'rounded'}
                             textDecorationColor={colors.white}
                             placeholder={'Enter Your Password'} autoCapitalize={'none'} autoCorrect={false}
+                            fontFamily={Fonts.RwMed}
                             value={values.password}
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
@@ -113,7 +112,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
                             }
                             borderColor={errors.password ? colors.gray : colors.coolGray} size={'md'} placeholderTextColor={useColorModeValue(colors.ebony, colors.white)}
                         />
-                        <Text ml={'3.5'} fontSize={'xs'} color={colors.gray} mt={'0.5'} mb={'1'} >{errors.password}</Text>
+                        {errors.password && <StyledText content={`${errors.password}`} fontFamily={Fonts.RwLight} ml={3.5} my={0.5} fontSize={'xs'} />}
                     </Box>
                     <Center mb={'2'}>
                         <TouchableOpacity onPress={() => {
@@ -122,7 +121,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
 
                         }}>
                             <Box mt={'2'} borderColor={colors.gray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'2'}>
-                                <Text color={colors.gray} fontWeight={'black'} fontSize={'lg'}>Login</Text>
+                                <StyledText fontFamily={Fonts.RwBold} mb={0.5} fontSize={'lg'} content='Login' />
                             </Box>
                         </TouchableOpacity>
                     </Center>
@@ -131,7 +130,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ }) => {
                             nav.navigate('register' as never)
                         }}>
                             <Box mt={'2'} borderColor={colors.coolGray} borderWidth={'2'} rounded={'full'} backgroundColor={colors.ebony} px={'5'} py={'2'}>
-                                <Text color={colors.white} fontWeight={'black'} fontSize={'lg'}>Dont have an account? Sign-Up</Text>
+                                <StyledText fontFamily={Fonts.RwExBold} fontSize={'lg'} content={`Dont have an account? Sign-Up`} />
                             </Box>
                         </TouchableOpacity>
                     </Center>
