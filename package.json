@@ -21,6 +21,7 @@
     "firebase": "8.2.3",
     "formik": "^2.2.9",
     "lottie-react-native": "^5.1.4",
+    "moti": "^0.18.0",
     "native-base": "^3.4.13",
     "react": "18.0.0",
     "react-dom": "18.0.0",

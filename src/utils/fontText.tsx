@@ -34,17 +34,18 @@ interface Props {
     numofLines?: number
     size?: string 
     textAlign?: string | any
+    isTrunc?: boolean
 }
 
 export const StyledText: React.FC<Props> = ({
-    content, fontFamily, textAlign,fontSize, size, my, mx, pb, pt, pl, pr, letterSpacing, mb, mt, ml, mr, py, px, numofLines
+    content, fontFamily, textAlign,fontSize, size, my, mx, pb, pt, pl, pr, letterSpacing, mb, mt, ml, mr, py, px, numofLines, isTrunc
 }) => {
     return (
         <Box mb={mb} mt={mt} mr={mr} ml={ml}
             mx={mx} py={py} px={px} my={my} pb={pb} pt={pt} pl={pl}>
             <Text color={useColorModeValue(colors.ebony, colors.white)}
                 pr={pr} letterSpacing={letterSpacing}
-                fontSize={fontSize} style={{ fontFamily: fontFamily }} size={size} textAlign={textAlign}   >
+                fontSize={fontSize} style={{ fontFamily: fontFamily }} size={size} textAlign={textAlign} isTruncated={isTrunc}   >
                 {content}
             </Text>
         </Box>

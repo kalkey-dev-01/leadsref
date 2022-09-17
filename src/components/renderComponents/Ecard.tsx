@@ -1,4 +1,4 @@
-import { Box, Circle, HStack, useColorModeValue, VStack } from 'native-base'
+import { Box, Button, Circle, HStack, PresenceTransition, useColorModeValue, VStack } from 'native-base'
 import React from 'react'
 import { UserCircleIcon, MailIcon, AtSymbolIcon, ExclamationCircleIcon, PhoneIcon, GlobeIcon, GlobeAltIcon, MapIcon, LinkIcon, IdentificationIcon, KeyIcon, UsersIcon, TableIcon, ArrowCircleDownIcon } from 'react-native-heroicons/outline';
 import colors from '../../utils/colors';
@@ -6,7 +6,11 @@ import { Fonts, StyledText } from '../../utils/fontText';
 import { RootObject } from './EnrichCard';
 import { Linking } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Alert } from 'react-native'
+import { Alert, } from 'react-native'
+import { MotiView } from 'moti';
+import { AnimatePresence } from 'moti/build';
+
+
 
 interface EcardProps {
     item: RootObject
@@ -15,7 +19,8 @@ interface EcardProps {
 export const Ecard: React.FC<EcardProps> = ({ item }) => {
     const icoCol = useColorModeValue(colors.ebony, colors.lightGray)
     const [show, setShow] = React.useState<boolean>(false)
-
+    const [show1, setShow1] = React.useState<boolean>(false)
+    const [show2, setShow2] = React.useState<boolean>(false)
 
     return (
         <>
@@ -25,35 +30,36 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
 
                     <Box>
                         <HStack space={1}>
-                            <StyledText fontSize={22} content={item.first_name} fontFamily={Fonts.RwMed} />
-                            <StyledText fontSize={22} content={item.last_name} fontFamily={Fonts.RwReg} />
+                            <StyledText fontSize={'2xl'} content={item.first_name} fontFamily={Fonts.RwMed} />
+                            <StyledText fontSize={'2xl'} content={item.last_name} fontFamily={Fonts.RwReg} />
                         </HStack>
                     </Box>
-                    <UserCircleIcon color={useColorModeValue(colors.ebony, colors.white)} size={50} />
+                    {
+                        item.picture !== '' ?
+                            <UserCircleIcon color={useColorModeValue(colors.ebony, colors.lightGray)} size={50} />
+                            : <UserCircleIcon color={useColorModeValue(colors.ebony, colors.white)} size={50} />
+                    }
 
                 </HStack>
-
-
                 {
                     item.job_title &&
                     <HStack alignItems={'center'} space={'2'}>
                         <IdentificationIcon color={icoCol} size={22.5} />
-                        <StyledText content={item.job_title} fontFamily={Fonts.RwSemiBold} fontSize={12} py={1} pb={1} pr={5} numofLines={1} />
+                        <StyledText content={item.job_title} fontFamily={Fonts.RwSemiBold} fontSize={'md'} isTrunc={true} py={1} pb={1} pr={5} numofLines={1} />
                     </HStack>
                 }
-
                 {
                     item.location &&
                     <HStack alignItems={'center'} space={'2'}>
                         <MapIcon color={icoCol} size={22.5} />
-                        <StyledText content={item.location} fontFamily={Fonts.RwBold} fontSize={14} py={1} pb={1} numofLines={1} />
+                        <StyledText content={item.location} fontFamily={Fonts.RwBold} fontSize={'sm'} py={1} pb={1} numofLines={1} />
                     </HStack>
                 }
                 {
                     item.business_email &&
                     <HStack alignItems={'center'} space={'2'}>
                         <MailIcon color={icoCol} size={22.5} />
-                        <StyledText content={item.business_email} fontFamily={Fonts.RwMed} fontSize={14} py={1} pb={1} numofLines={1} />
+                        <StyledText content={item.business_email} fontFamily={Fonts.RwMed} fontSize={'sm'} py={1} pb={1} numofLines={1} />
                     </HStack>
                 }
                 {
@@ -62,7 +68,7 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                         <>
                             <HStack alignItems={'center'} space={'2'}>
                                 <AtSymbolIcon color={icoCol} size={22.5} />
-                                <StyledText content={item.personal_email} fontFamily={Fonts.RwBlack} fontSize={15} py={1} pb={1} numofLines={1} />
+                                <StyledText content={item.personal_email} fontFamily={Fonts.RwLight} fontSize={'lg'} py={1} pb={1} numofLines={1} />
                             </HStack>
                         </>
                         :
@@ -80,7 +86,7 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                         <>
                             <HStack alignItems={'center'} space={'2'}>
                                 <PhoneIcon color={icoCol} size={22.5} />
-                                <StyledText content={item.phone} fontFamily={Fonts.RwSemiBold} fontSize={15} py={1} pb={1} numofLines={1} />
+                                <StyledText content={item.phone} fontFamily={Fonts.RwSemiBold} fontSize={'md'} py={1} pb={1} numofLines={1} />
                             </HStack>
                         </>
                         :
@@ -93,75 +99,100 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                         </>
                 }
 
-                {
-                    item.social_url && item.social_url.toString().includes('sales') === true && item.connections_count === ''
-                        ?
-                        <>
-                            {/* Normal Linked In Profile */}
+                {item.social_url !== false ?
+                    <>
+                        {
+                            item.social_url && item.social_url.toString().includes('sales') === true && item.connections_count === ''
+                                ?
+                                <>
+                                    {/* Normal Linked In Profile */}
 
-                            <TouchableOpacity onPress={
-                                React.useCallback(async () => {
-                                    let supported = await Linking.canOpenURL(item.social_url.toString())
-                                    if (supported) {
-                                        await Linking.openURL(item.social_url.toString())
-                                    } else {
-                                        Alert.alert(`This Social Url seems faulty`)
-                                    }
-                                }, [item.social_url])
-                            }>
-                                <HStack alignItems={'center'} space={'2'}>
-                                    <LinkIcon color={icoCol} size={22.5} />
-                                    <TableIcon color={icoCol} size={22.5} />
+                                    <TouchableOpacity onPress={
+                                        React.useCallback(async () => {
+                                            let supported = await Linking.canOpenURL(item.social_url.toString())
+                                            if (supported) {
+                                                await Linking.openURL(item.social_url.toString())
+                                            } else {
+                                                Alert.alert(`This LinkedIn Url seems faulty`, 'This Person might not have a LinkedIn Account',)
+                                            }
+                                        }, [item.social_url])
+                                    }>
+                                        <HStack alignItems={'center'} space={'2'}>
+                                            <LinkIcon color={icoCol} size={22.5} />
+                                            <TableIcon color={icoCol} size={22.5} />
 
-                                    <StyledText content={`LinkedIn Sales Navigator`} fontFamily={Fonts.RwExBold} fontSize={15} py={1} pb={1} numofLines={1} />
-                                </HStack>
-                            </TouchableOpacity>
-                        </>
-                        :
-                        <>
-                            {/* Sales Navigator Logo */}
-                            <TouchableOpacity onPress={
-                                React.useCallback(async () => {
-                                    let supported = await Linking.canOpenURL(item.social_url.toString())
-                                    if (supported) {
-                                        await Linking.openURL(item.social_url.toString())
-                                    } else {
-                                        Alert.alert(`This Social Url seems faulty`)
-                                    }
-                                }, [item.social_url])
-                            }>
-                                <HStack alignItems={'center'} space={'2'}>
-                                    <LinkIcon color={icoCol} size={22.5} />
-                                    <UsersIcon color={icoCol} size={22.5} />
-                                    <StyledText content={`LinkedIn Profile & connection ${item.connections_count}`} fontFamily={Fonts.RwBold} py={1} pb={1} numofLines={1} fontSize={15} />
-                                </HStack>
-                            </TouchableOpacity>
-                        </>
+                                            <StyledText content={`LinkedIn Sales Navigator`} fontFamily={Fonts.RwExBold} fontSize={'sm'} py={1} pb={1} numofLines={1} />
+                                        </HStack>
+                                    </TouchableOpacity>
+                                </>
+                                :
+                                <>
+                                    {/* Sales Navigator Logo */}
+                                    <TouchableOpacity onPress={
+                                        React.useCallback(async () => {
+                                            let supported = await Linking.canOpenURL(item.social_url.toString())
+                                            if (supported) {
+                                                await Linking.openURL(item.social_url.toString())
+                                            } else {
+                                                Alert.alert(`This LinkedIn Url seems faulty`, 'This Person might not have a LinkedIn Account', [
+                                                    {
+                                                        text: 'Okay I understand',
+                                                        style: 'cancel'
+                                                    }
+                                                ],)
+                                            }
+                                        }, [item.social_url])
+                                    }>
+                                        <HStack alignItems={'center'} space={'2'}>
+                                            <LinkIcon color={icoCol} size={22.5} />
+                                            <UsersIcon color={icoCol} size={22.5} />
+                                            <StyledText content={`LinkedIn Profile & connection ${item.connections_count}`} fontFamily={Fonts.RwBold} py={1} pb={1} numofLines={1} fontSize={15} />
+                                        </HStack>
+                                    </TouchableOpacity>
+                                </>
+                        }
+                    </>
+                    : null
                 }
-
-
-
                 {
                     item.keywords.length > 0
                         ?
                         <VStack alignItems={'flex-start'} space={0.5}>
                             <TouchableOpacity onPress={React.useCallback(() => {
-                                setShow(!show)
-                            }, [show])}>
+                                setShow1(!show1)
+                            }, [show1])}>
                                 <HStack alignItems={'center'} space={2}>
                                     <KeyIcon color={icoCol} size={22.5} />
-                                    <StyledText pb={0.5} content='Keywords' fontFamily={Fonts.RwSemiBold} />
+                                    <StyledText pb={0.5} content='Keywords' fontSize={'md'} fontFamily={Fonts.RwBold} />
                                     <ArrowCircleDownIcon color={icoCol} size={15} />
 
                                 </HStack>
                             </TouchableOpacity>
-                            {show &&
-                                item.keywords.slice(0, 2).map((item, index) =>
-                                    <HStack key={index} alignItems={'center'} space={2}>
-                                        <Circle bgColor={icoCol} size={7.5} mx={2} />
-                                        <StyledText content={item} fontFamily={Fonts.RwReg} pb={1} numofLines={1} fontSize={15} />
-                                    </HStack>
-                                )
+                            {show1 &&
+                                item.keywords.map((item, index) => (
+                                    <AnimatePresence key={index}>
+                                        <MotiView from={{
+                                            opacity: 0,
+                                            translateY: -15
+                                        }}
+                                            animate={{
+                                                opacity: 1,
+                                                translateY: 0
+                                            }}
+                                            exit={{
+                                                opacity: 0,
+                                                translateY: -15
+                                            }}
+                                            transition={{
+                                                type: 'spring'
+                                            }} >
+                                            <HStack key={index} alignItems={'center'} space={2}>
+                                                <Circle bgColor={icoCol} size={7.5} mx={2} />
+                                                <StyledText content={item} fontFamily={Fonts.RwSemiBold} fontSize={'sm'} pb={1} numofLines={1} />
+                                            </HStack>
+                                        </MotiView>
+                                    </AnimatePresence>
+                                ))
 
                             }
 
@@ -174,21 +205,40 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                         ?
                         <VStack alignItems={'flex-start'} space={0.5}>
                             <TouchableOpacity onPress={React.useCallback(() => {
-                                setShow(!show)
-                            }, [show])}>
+                                setShow2(!show2)
+                            }, [show2])}>
                                 <HStack alignItems={'center'} space={2}>
                                     <KeyIcon color={icoCol} size={22.5} />
-                                    <StyledText pb={0.5} content='Past Companies' fontFamily={Fonts.RwSemiBold} />
+                                    <StyledText pb={0.5} content='Past Companies' fontSize={'md'} fontFamily={Fonts.RwBold} />
                                     <ArrowCircleDownIcon color={icoCol} size={15} />
 
                                 </HStack>
                             </TouchableOpacity>
-                            {show &&
-                                item.past_company.map((item, index) =>
-                                    <HStack key={index} alignItems={'center'} space={2}>
-                                        <Circle bgColor={icoCol} size={7.5} mx={2} />
-                                        <StyledText content={item} fontFamily={Fonts.RwReg} pb={1} numofLines={1} fontSize={15} />
-                                    </HStack>
+                            {show2 &&
+                                item.past_company.map((item, index) => (
+                                    <AnimatePresence key={index}>
+                                        <MotiView from={{
+                                            opacity: 0,
+                                            translateY: -15
+                                        }}
+                                            animate={{
+                                                opacity: 1,
+                                                translateY: 0
+                                            }}
+                                            exit={{
+                                                opacity: 0,
+                                                translateY: -15
+                                            }}
+                                            transition={{
+                                                type: 'spring'
+                                            }} >
+                                            <HStack key={index} alignItems={'center'} space={2}>
+                                                <Circle bgColor={icoCol} size={7.5} mx={2} />
+                                                <StyledText content={item} fontFamily={Fonts.RwSemiBold} fontSize={'sm'} pb={1} numofLines={1} />
+                                            </HStack>
+                                        </MotiView>
+                                    </AnimatePresence>
+                                )
                                 )
 
                             }
@@ -206,17 +256,40 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                             }, [show])}>
                                 <HStack alignItems={'center'} space={2}>
                                     <KeyIcon color={icoCol} size={22.5} />
-                                    <StyledText pb={0.5} content='Skills' fontFamily={Fonts.RwBold} />
+                                    <StyledText pb={0.5} content='Skills' fontSize={'md'} fontFamily={Fonts.RwBold} />
                                     <ArrowCircleDownIcon color={icoCol} size={15} />
 
                                 </HStack>
                             </TouchableOpacity>
                             {show &&
-                                item.skills.slice(0,4).map((item, index) =>
-                                    <HStack key={index} alignItems={'center'} space={2}>
-                                        <Circle bgColor={icoCol} size={7.5} mx={2} />
-                                        <StyledText content={item} fontFamily={Fonts.RwReg} pb={1} numofLines={1} fontSize={15} />
-                                    </HStack>
+                                item.skills.map((item, index) => (
+                                    <AnimatePresence key={index}>
+                                        <MotiView from={{
+                                            opacity: 0,
+                                            translateY: -15
+                                        }}
+                                            animate={{
+                                                opacity: 1,
+                                                translateY: 0
+                                            }}
+                                            exit={{
+                                                opacity: 0,
+                                                translateY: -15
+                                            }}
+                                            transition={{
+                                                type: 'spring'
+                                            }} >
+                                            {item !== ''
+                                                ?
+                                                <HStack key={index} alignItems={'center'} space={2}>
+                                                    <Circle bgColor={icoCol} size={7.5} mx={2} />
+                                                    <StyledText content={item} fontFamily={Fonts.RwSemiBold} fontSize={'sm'} pb={1} numofLines={1} />
+                                                </HStack>
+                                                : null
+                                            }
+                                        </MotiView>
+                                    </AnimatePresence>
+                                )
                                 )
 
                             }
