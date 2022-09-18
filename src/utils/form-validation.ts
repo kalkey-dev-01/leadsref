@@ -29,3 +29,5 @@ export const emailFinderSchema = yup.object().shape({
 export const domainSchema = yup.object().shape({
     domain: yup.string().matches(domainRules, {message: 'Enter a valid url'}).required('Enter the Company Domain correctly')
 })
+
+export const domainNameSchema = yup.string().required("Enter The Name You want to search")

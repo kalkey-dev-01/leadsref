@@ -110,9 +110,9 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                                 data?.data['employees'][0] &&
                                 <VStack mt={5} mb={1.5} mx={5} space={2} alignItems={'flex-start'} borderColor={borcol} rounded={'2xl'} borderWidth={2} px={2.5} py={3}>
                                     <StyledText content={`${data?.data['employees'][0]['company_name']}`} fontFamily={Fonts.RwBold} fontSize={'xl'} />
-                                    <StyledText content={`Domain - ${data?.data['employees'][0]['company_domain']}`} fontFamily={Fonts.RwBold} fontSize={'sm'}  />
+                                    <StyledText content={`Domain - ${data?.data['employees'][0]['company_domain']}`} fontFamily={Fonts.RwBold} fontSize={'sm'} />
 
-                                    <StyledText content={`Address - ${data?.data['employees'][0]['company_address']}`} fontFamily={Fonts.RwBold}  fontSize={'xs'} isTrunc={true}/>
+                                    <StyledText content={`Address - ${data?.data['employees'][0]['company_address']}`} fontFamily={Fonts.RwBold} fontSize={'xs'} isTrunc={true} />
                                     <StyledText content={`Country -  ${data?.data['employees'][0]['company_country']}`} fontFamily={Fonts.RwBold} fontSize={'lg'} />
                                     <StyledText content={`Year Founded - ${data?.data['employees'][0]['company_founded']}`} fontFamily={Fonts.RwBold} fontSize={'lg'} />
 
@@ -132,7 +132,9 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                                 items={data?.data['employees']}
                                 render={(item: RootObject,) =>
                                     <Box mx={3} my={3} borderWidth={1} borderRadius={'xl'} borderColor={borcol} bgColor={bgcol}  >
-                                        <Ecard item={item} />
+                                        <Ecard
+                                            item={item}
+                                        />
                                     </Box>
 
                                 }

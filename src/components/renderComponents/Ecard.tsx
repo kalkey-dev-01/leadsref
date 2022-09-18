@@ -68,7 +68,7 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                         <>
                             <HStack alignItems={'center'} space={'2'}>
                                 <AtSymbolIcon color={icoCol} size={22.5} />
-                                <StyledText content={item.personal_email} fontFamily={Fonts.RwLight} fontSize={'lg'} py={1} pb={1} numofLines={1} />
+                                <StyledText content={item.personal_email} fontFamily={Fonts.RwMed} fontSize={'lg'} py={1} pb={1} numofLines={1} />
                             </HStack>
                         </>
                         :
@@ -262,7 +262,7 @@ export const Ecard: React.FC<EcardProps> = ({ item }) => {
                                 </HStack>
                             </TouchableOpacity>
                             {show &&
-                                item.skills.map((item, index) => (
+                                item.skills.slice(0,9).map((item, index) => (
                                     <AnimatePresence key={index}>
                                         <MotiView from={{
                                             opacity: 0,
