@@ -6,6 +6,7 @@ import { LoginScreen } from './screens/LoginScreen';
 import { RegisterScreen } from './screens/RegisterScreen';
 import { HomeScreen } from './screens/HomeScreen';
 import { SettingsScreen } from './screens/SettingsScreen';
+import { ProfileScreens } from './screens/ProfileScreens';
 
 
 
@@ -19,6 +20,7 @@ export const SignedInStack = () => {
         <Stack.Navigator initialRouteName='home' screenOptions={{ header: () => null  ,animationEnabled: true}}>
             <Stack.Screen name='home'  component={HomeScreen} />
             <Stack.Screen name='settings' component={SettingsScreen} />
+            <Stack.Screen  name='profile' component={ProfileScreens} />
         </Stack.Navigator>
     );
 }

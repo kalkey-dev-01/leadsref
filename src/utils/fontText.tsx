@@ -32,19 +32,24 @@ interface Props {
     py?: string | number,
     letterSpacing?: string | number
     numofLines?: number
-    size?: string 
+    size?: string
     textAlign?: string | any
     isTrunc?: boolean
+    alignSelf?: string,
+    opacity?: number,
+    bgColor?: any
+    borCol?: any
 }
 
 export const StyledText: React.FC<Props> = ({
-    content, fontFamily, textAlign,fontSize, size, my, mx, pb, pt, pl, pr, letterSpacing, mb, mt, ml, mr, py, px, numofLines, isTrunc
+    alignSelf, opacity, content, fontFamily, textAlign, fontSize, size, my, mx, pb, pt,
+    pl, pr, letterSpacing, mb, mt, ml, mr, py, px, numofLines, isTrunc, bgColor, borCol
 }) => {
     return (
-        <Box mb={mb} mt={mt} mr={mr} ml={ml}
+        <Box mb={mb} mt={mt} mr={mr} ml={ml} alignSelf={alignSelf} pr={pr} bgColor={bgColor} borderColor={borCol}
             mx={mx} py={py} px={px} my={my} pb={pb} pt={pt} pl={pl}>
-            <Text color={useColorModeValue(colors.ebony, colors.white)}
-                pr={pr} letterSpacing={letterSpacing}
+            <Text color={useColorModeValue(colors.ebony, colors.white)} opacity={opacity}
+                letterSpacing={letterSpacing}
                 fontSize={fontSize} style={{ fontFamily: fontFamily }} size={size} textAlign={textAlign} isTruncated={isTrunc}   >
                 {content}
             </Text>
