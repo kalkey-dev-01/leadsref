@@ -33,21 +33,25 @@ export const ProfileScreens: React.FC<ProfileScreensProps> = ({ }) => {
                 <View h={'full'} backgroundColor={useColorModeValue(colors.lightGray, colors.ebony)}>
                     <VStack alignItems={'center'}>
                         <Box borderColor={useColorModeValue(colors.ebony, colors.lightGray)} borderWidth={1.5} my={3} px={5}>
-                            <StyledText content={`Thank you for using leadistro Beta Release`} fontFamily={Fonts.RwExBold} fontSize={36} textAlign={'center'} />
+                            <StyledText content={`Thank you for testing`} fontFamily={Fonts.RwExBold} fontSize={36} textAlign={'center'} />
+                            <StyledText content={`leadistro Beta `} fontFamily={Fonts.RwExBold} fontSize={36} textAlign={'center'} />
+                          
                         </Box>
-                        <HStack alignItems={'center'} justifyContent={'space-evenly'} w={'100%'} alignSelf={'center'}>
+                        <HStack alignItems={'center'} justifyContent={'space-between'} px={4} w={'100%'} alignSelf={'center'}>
                             <MailIcon size={25} color={useColorModeValue(colors.ebony, colors.white)} />
                             <StyledText content={`${user?.email}`} fontFamily={Fonts.RwSemiBold} fontSize={'xl'} my={2} pb={1} textAlign={'left'} />
                         </HStack>
-                    </VStack><Center mt={'6'} >
-                        <TouchableOpacity onPress={handleSignOut} >
-                            <HStack rounded={'full'} borderColor={useColorModeValue(colors.ebony, colors.lightGray)}
-                                borderWidth={2} alignItems={'center'} justifyContent={'space-evenly'} px={'2.5'} >
-                                <StyledText content='Sign Out' fontFamily={Fonts.RwMed} fontSize={20} mx={2} pb={1.5} />
-                                <ArrowCircleLeftIcon color={useColorModeValue(colors.ebony, colors.lightGray)} size={25} />
-                            </HStack>
-                        </TouchableOpacity>
-                    </Center>
+                        <Center alignSelf={'center'} mt={'10'} >
+                            <TouchableOpacity onPress={handleSignOut} >
+                                <HStack rounded={'full'} borderColor={useColorModeValue(colors.ebony, colors.lightGray)}
+                                    borderWidth={2} alignItems={'center'} justifyContent={'space-evenly'} px={'2.5'} >
+                                    <StyledText content='Sign Out' fontFamily={Fonts.RwMed} fontSize={20} mx={2} pb={1.5} />
+                                    <ArrowCircleLeftIcon color={useColorModeValue(colors.ebony, colors.lightGray)} size={25} />
+                                </HStack>
+                            </TouchableOpacity>
+                        </Center>
+                    </VStack>
+
                 </View>
             </KeyboardAwareScrollView>
         </SafeAreaView>

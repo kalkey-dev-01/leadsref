@@ -53,7 +53,7 @@ export const IndividualEmailSearch: React.FC<IndividualEmailSearchProps> = ({ })
         return <>
             <VStack alignItems={'center'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
                 <StyledText content={`Leadistro is Searching`} fontFamily={Fonts.RwBold} fontSize={'xl'} />
-                <StyledText content={`${values.first_name} ${values.last_name} working in ${values.domain}`} fontFamily={Fonts.RwSemiBold} fontSize={'lg'} />
+                <StyledText content={`${values.first_name} ${values.last_name} working in ${values.domain}`} fontFamily={Fonts.RwSemiBold} fontSize={'2xl'} textAlign={'center'} />
                 <Center h={'full'}>
                     <Loading />
                 </Center>
@@ -129,11 +129,23 @@ export const IndividualEmailSearch: React.FC<IndividualEmailSearchProps> = ({ })
 
                             </Box>
                             <Box bgColor={bgcol} borderColor={borcol} borderWidth={3} alignSelf={'center'} mx={3} rounded={'2xl'} my={10} py={'5'} px={3}>
-                                <StyledText content={`Features being added to Leadistro at the moment`}  alignSelf={'flex-start'} textAlign={'left'} px={8} fontSize={'lg'} fontFamily={Fonts.RwBlack} />
+                                <StyledText content={`Features being added to Leadistro at the moment`} alignSelf={'flex-start'} textAlign={'left'} px={8} fontSize={'lg'} fontFamily={Fonts.RwBlack} />
                                 <StyledText content={`Create Email Marketing Campaigns`} mt={5} alignSelf={'flex-start'} textAlign={'left'} px={8} fontSize={'lg'} fontFamily={Fonts.RwSemiBold} />
                                 <StyledText content={`Filter Employee Leads Success Rate`} mt={5} alignSelf={'flex-start'} textAlign={'left'} px={8} fontSize={'lg'} fontFamily={Fonts.RwSemiBold} />
                             </Box>
                         </>
+                    }
+                    {
+                        data === undefined
+                            ?
+                            <Center borderColor={borcol} bgColor={bgcol} my={10} mx={8} py={8} px={3} rounded={'2xl'} alignSelf={'center'} borderWidth={1}>
+                                <StyledText content={'Looks like you did not search anything yet'} letterSpacing={5}
+                                    fontSize={'2xl'} textAlign={'center'} fontFamily={Fonts.RwBlack} />
+                                <StyledText content={'leadistro ©'} mt={10} letterSpacing={0.75}
+                                    fontSize={'2xl'} textAlign={'center'} fontFamily={Fonts.RwSemiBold} />
+                            </Center>
+                            :
+                            null
                     }
 
 

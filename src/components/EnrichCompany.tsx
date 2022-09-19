@@ -64,8 +64,8 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
     if (loading) {
         return <>
             <VStack alignItems={'center'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-                <StyledText content={`Leadistro is Searching`} fontFamily={Fonts.RwBold} fontSize={20} />
-                <StyledText content={`${values.domain}`} fontFamily={Fonts.RwSemiBold} fontSize={25} />
+                <StyledText content={`Leadistro is Searching`} fontFamily={Fonts.RwBold} fontSize={'xl'} />
+                <StyledText content={`Employees of ${values.domain}`} fontFamily={Fonts.RwSemiBold} fontSize={'2xl'} />
                 <Center h={'full'}>
                     <Loading />
                 </Center>
@@ -103,6 +103,18 @@ export const EnrichCompany: React.FC<EnrichCompanyProps> = ({ }) => {
                     </Center>
 
                     {/* Complete Post Logic and Rendering */}
+                    {
+                        data === undefined
+                            ?
+                            <Center borderColor={borcol} bgColor={bgcol} my={10} mx={8} py={8} px={3} rounded={'2xl'} borderWidth={1}>
+                                <StyledText content={'Looks like you did not search anything yet'} letterSpacing={5}
+                                    fontSize={'2xl'} textAlign={'center'} fontFamily={Fonts.RwBlack} />
+                                <StyledText content={'leadistro ©'} mt={10} letterSpacing={0.75}
+                                    fontSize={'2xl'} textAlign={'center'} fontFamily={Fonts.RwSemiBold} />
+                            </Center>
+                            :
+                            null
+                    }
 
                     {data &&
                         <>

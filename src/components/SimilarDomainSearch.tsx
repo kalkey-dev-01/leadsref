@@ -45,8 +45,8 @@ export const SimilarDomainSearch: React.FC<SimilarDomainSearchProps> = ({ }) => 
     if (loading) {
         return <>
             <VStack alignItems={'center'} bgColor={useColorModeValue(colors.lightGray, colors.ebony)}>
-                <StyledText content={`Leadistro is Searching`} fontFamily={Fonts.RwBold} fontSize={20} />
-                <StyledText content={`${values.name}`} fontFamily={Fonts.RwSemiBold} fontSize={25} />
+                <StyledText content={`Leadistro is Searching Domains Index`} fontFamily={Fonts.RwBold} fontSize={'xl'} />
+                <StyledText content={`of ${values.name}`} fontFamily={Fonts.RwSemiBold} fontSize={'2xl'} />
                 <Center h={'full'}>
                     <Loading />
                 </Center>
@@ -82,7 +82,7 @@ export const SimilarDomainSearch: React.FC<SimilarDomainSearchProps> = ({ }) => 
                     {data && <CCNCard
                         items={data?.data['data']}
                         render={(item: CCNCardProps) =>
-                            <VStack alignItems={'center'} rounded={'3xl'} mx={4} my={3} py={4}  borderWidth={0.75} borderColor={borcol} bgColor={bgcol}>
+                            <VStack alignItems={'center'} rounded={'3xl'} mx={4} my={3} py={4} borderWidth={0.75} borderColor={borcol} bgColor={bgcol}>
                                 <StyledText content={`${item.name}`} fontFamily={Fonts.RwMed} letterSpacing={1} fontSize={'xl'} isTrunc={true} />
                                 <TouchableOpacity onPress={async () => {
                                     let supported = await Linking.canOpenURL(`https://www.${item.domain}`)
@@ -105,7 +105,19 @@ export const SimilarDomainSearch: React.FC<SimilarDomainSearchProps> = ({ }) => 
                         }
                     />
                     }
-                    
+                     {
+                        data === undefined
+                            ?
+                            <Center borderColor={borcol} bgColor={bgcol} my={10} mx={8} py={8} px={3} rounded={'2xl'} borderWidth={1}>
+                                <StyledText content={'Looks like you did not search anything yet'} letterSpacing={5}
+                                    fontSize={'2xl'} textAlign={'center'} fontFamily={Fonts.RwBlack} />
+                                <StyledText content={'leadistro ©'} mt={10} letterSpacing={0.75}
+                                    fontSize={'2xl'} textAlign={'center'} fontFamily={Fonts.RwSemiBold} />
+                            </Center>
+                            :
+                            null
+                    }
+
                 </Box>
             </View>
         </KeyboardAwareScrollView>
