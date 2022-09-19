@@ -82,8 +82,8 @@ export const SimilarDomainSearch: React.FC<SimilarDomainSearchProps> = ({ }) => 
                     {data && <CCNCard
                         items={data?.data['data']}
                         render={(item: CCNCardProps) =>
-                            <VStack alignItems={'center'} rounded={'3xl'} mx={8} my={3} py={4}  borderWidth={0.75} borderColor={borcol} bgColor={bgcol}>
-                                <StyledText content={`${item.name}`} fontFamily={Fonts.RwMed} letterSpacing={1} fontSize={'xl'} />
+                            <VStack alignItems={'center'} rounded={'3xl'} mx={4} my={3} py={4}  borderWidth={0.75} borderColor={borcol} bgColor={bgcol}>
+                                <StyledText content={`${item.name}`} fontFamily={Fonts.RwMed} letterSpacing={1} fontSize={'xl'} isTrunc={true} />
                                 <TouchableOpacity onPress={async () => {
                                     let supported = await Linking.canOpenURL(`https://www.${item.domain}`)
                                     console.log(supported);

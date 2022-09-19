@@ -36,15 +36,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({ }) => {
                         <ThemeToggle />
                     </HStack>
                 </Center>
-                <Center mt={'6'} >
-                    <TouchableOpacity onPress={handleSignOut} >
-                        <HStack rounded={'full'} borderColor={useColorModeValue(colors.ebony, colors.lightGray)}
-                            borderWidth={2} alignItems={'center'} justifyContent={'space-evenly'} px={'2.5'} >
-                            <StyledText content='Sign Out' fontFamily={Fonts.RwMed} fontSize={20} mx={2} pb={1.5} />
-                            <ArrowCircleLeftIcon color={useColorModeValue(colors.ebony, colors.lightGray)} size={25} />
-                        </HStack>
-                    </TouchableOpacity>
-                </Center>
+             
 
 
             </VStack>
